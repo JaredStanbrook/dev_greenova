@@ -54,7 +54,7 @@ class RegisterView(CreateView):
         try:
             logger.info(f"New user registration: {form.cleaned_data['username']}")
             response = super().form_valid(form)
-            user = form.save()
+            user = form.save() #TODO migth be saving twice?
             login(self.request, user)
             next_url = self.request.GET.get('next')
             if next_url:

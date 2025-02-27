@@ -18,7 +18,7 @@
   },
   "[django-html]": {
     "editor.formatOnSave": false,
-    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.defaultFormatter": "monosans.djlint",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.suggest.insertMode": "replace"
