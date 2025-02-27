@@ -73,6 +73,8 @@ INSTALLED_APPS = [
     "obligations.apps.ObligationsConfig",
     "chatbot.apps.ChatbotConfig",
     "mechanisms.apps.MechanismsConfig",
+    "django_htmx",
+    "django_hyperscript",
 ]
 
 MIDDLEWARE = [
@@ -81,6 +83,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',  # Keep CSRF for form handling
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = "greenova.urls"
@@ -139,7 +142,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "static"
 ]
 
 # Add these settings for static files
