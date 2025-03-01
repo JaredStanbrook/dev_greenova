@@ -24,7 +24,7 @@
     "editor.suggest.insertMode": "replace"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.formatOnSave": false,
     "editor.tabSize": 2,
     "editor.insertSpaces": true,

@@ -1,8 +1,9 @@
 from typing import Any, Dict
-from django.views.generic import TemplateView
-from django.http import HttpRequest
 import logging
+
 from django.conf import settings
+from django.http import HttpRequest
+from django.views.generic import TemplateView
 
 logger = logging.getLogger(__name__)
 

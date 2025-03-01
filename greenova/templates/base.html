@@ -48,7 +48,6 @@
                    align-items: center">
           {% if request.user.is_authenticated %}
             <!-- Left side navigation items -->
-            <li role="none" style="margin-left: 2rem">
               <li role="none" style="margin-left: 2rem">
                 <nav aria-label="Primary navigation" role="navigation">
                   <ul>
@@ -69,12 +68,13 @@
                 </nav>
               </li>
               <!-- Auth Actions (right-aligned) -->
-              <li role="none"
+              <li _="on load if user_authenticated then hide else show"
+              role="none"
                   style="margin-left: auto;
                          display: flex;
                          align-items: center;
                          gap: 1rem">
-                {% if request.user.is_authenticated %}
+
                   {% load chatbot_tags %}
                   {% chat_widget %}
                   <!-- Logout -->
@@ -85,20 +85,26 @@
                         hx-redirect="/"
                         _="on htmx:afterRequest
                            if event.detail.successful
-                           window.location.href = '/'">
+                           then set location.href to '/'">
                       {% csrf_token %}
                       <button type="submit" role="menuitem">Logout</button>
                   </form>
-                {% endif %}
               </li>
             {% else %}
-              <li role="none" style="margin-left: auto">
-                <a href="{% url 'authentication:login' %}"
-                   role="menuitem"
-                   aria-label="Login"
-                   hx-boost="true"
-                   _="on click call alert('Redirecting to login...')">Login</a>
-              </li>
+            <li role="none" style="margin-left: auto">
+              <a href="{% url 'authentication:register' %}"
+                 role="menuitem"
+                 aria-label="Register"
+                 _="on load if location.pathname is '{% url 'authentication:register' %}' then hide me">
+                Register
+              </a>
+              <a href="{% url 'authentication:login' %}"
+                 role="menuitem"
+                 aria-label="Login"
+                 _="on load if location.pathname is '{% url 'authentication:login' %}' then hide me">
+                Login
+              </a>
+            </li>
             {% endif %}
           </ul>
         </nav>

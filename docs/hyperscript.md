@@ -13,7 +13,7 @@
 
 ## Refactored Code (Hyperscript Template)
 ```html
-<nav _="on load if user_authenticated then show else hide">>
+<nav _="on load if user_authenticated then show else hide">
 <a href="{% url 'authentication:register' %}"
     role="button"
     class="primary">Get Started</a>
