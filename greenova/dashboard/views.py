@@ -1,25 +1,30 @@
-import logging
-from datetime import datetime
-from typing import Any, Dict, Optional, TypedDict, cast
-
-from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import AbstractUser
-from django.db.models import QuerySet
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_control
-from django.views.decorators.vary import vary_on_headers
+from typing import Dict, Any, cast, Optional, TypedDict
 from django.views.generic import TemplateView
-from django_htmx.http import (HttpResponseClientRedirect, HttpResponseClientRefresh,
-                              push_url, reswap, retarget, trigger_client_event)
-from obligations.models import Obligation
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.conf import settings
+from django.http import HttpRequest, HttpResponse
+from django.db.models import QuerySet
+from django.contrib.auth.models import AbstractUser
+from django.views.decorators.vary import vary_on_headers
+from django.views.decorators.cache import cache_control
+from django.utils.decorators import method_decorator
+from django.shortcuts import render
+from django_htmx.http import (
+    HttpResponseClientRedirect,
+    HttpResponseClientRefresh,
+    trigger_client_event,
+    push_url,
+    reswap,
+    retarget
+)
+from datetime import datetime
 from projects.models import Project
+from obligations.models import Obligation
+import logging
 
 # Constants for system information
-SYSTEM_STATUS = 'operational'  # or fetch from settings/environment
-APP_VERSION = '0.0.4'  # or fetch from settings/environment
+SYSTEM_STATUS = "operational"  # or fetch from settings/environment
+APP_VERSION = "0.0.4"  # or fetch from settings/environment
 LAST_UPDATED = datetime.now().date()  # or fetch from settings/environment
 
 logger = logging.getLogger(__name__)
@@ -36,7 +41,7 @@ class DashboardContext(TypedDict):
     user_roles: Dict[str, str]
 
 @method_decorator(cache_control(max_age=60), name='dispatch')
-@method_decorator(vary_on_headers('HX-Request'), name='dispatch')
+@method_decorator(vary_on_headers("HX-Request"), name='dispatch')
 class DashboardHomeView(LoginRequiredMixin, TemplateView):
     """Main dashboard view."""
     template_name = 'dashboard/dashboard.html'
@@ -69,9 +74,12 @@ class DashboardHomeView(LoginRequiredMixin, TemplateView):
 
             # Also trigger project selection if project_id is in the request
             project_id = request.GET.get('project_id')
-            if project_id and project_id != '0':
-                logger.debug(f'Triggering projectSelected event with ID: {project_id}')
-                trigger_client_event(response, 'projectSelected', {'id': project_id})
+            if project_id:
+                trigger_client_event(response, 'projectSelected', {"projectId": project_id})
+
+            # If the dashboard data is stale, force a refresh
+            if self._is_data_stale():
+                return HttpResponseClientRefresh()
 
         return response
 
@@ -102,13 +110,35 @@ class DashboardHomeView(LoginRequiredMixin, TemplateView):
                 'user': user,
                 'debug': settings.DEBUG,
                 'error': None,
-                'user_roles': user_roles,
-            })
+                'user': user,
+                'user_roles': {
+                    str(project.pk): project.get_user_role(user)
+                    for project in user_projects
+                }
+            }
 
-            logger.debug(f'Dashboard context: selected_project_id={selected_project_id}')
+            context.update(dashboard_context)
+            logger.info(f"Found {user_projects.count()} projects for user {user}")
+
+            # Add analytics data for selected project
+            if selected_project_id:
+                try:
+                    project = user_projects.get(pk=selected_project_id)
+
+                    # Fix the query - use project directly instead of projects field
+                    obligations = Obligation.objects.filter(
+                        project=project  # Changed from projects=project
+                    ).select_related('project')
+
+                except Project.DoesNotExist:
+                    logger.error(f"Project not found: {selected_project_id}")
+                    context['error'] = "Selected project not found"
+                except Exception as e:
+                    logger.error(f"Error processing analytics: {str(e)}")
+                    context['error'] = "Error processing analytics data"
 
         except Exception as e:
-            logger.exception(f'Error in dashboard context: {e}')
+            logger.error(f"Error loading dashboard: {str(e)}")
             context['error'] = str(e)
 
         return context
@@ -119,5 +149,42 @@ class DashboardHomeView(LoginRequiredMixin, TemplateView):
             user = cast(AbstractUser, self.request.user)
             return Project.objects.filter(members=user).order_by('-created_at')
         except Exception as e:
-            logger.exception(f'Error fetching projects: {e}')
+            logger.error(f"Error fetching projects: {str(e)}")
             return Project.objects.none()
+
+    @classmethod
+    @method_decorator(cache_control(max_age=30))
+    def overdue_count(self, request):
+        """
+        Returns the count of overdue obligations as plain text for HTMX to swap into the page.
+        This endpoint is designed to be called via hx-get and refreshed periodically.
+        """
+        try:
+            selected_project_id = request.GET.get('project_id')
+
+            count = Obligation.objects.filter(project=selected_project_id, recurring_status="Overdue").select_related('project').count()
+
+            if request.htmx:
+                response = render(
+                    request,
+                    "dashboard/partials/overdue_count.html",
+                    {"count": count}
+                )
+            else:
+                response = HttpResponse(str(count))
+
+            # When the count is over a threshold, highlight it by triggering a CSS change
+            if count > 5:
+                trigger_client_event(response, 'highOverdueCount', params={'count': count})
+
+            return response
+
+        except Exception as e:
+            logger.error(f"Error counting overdue items: {str(e)}")
+            return HttpResponse("0")
+
+class DashboardProfileView(TemplateView):
+    """Profile view."""
+    template_name = 'dashboard/profile.html'
+    login_url = 'account_login'
+    redirect_field_name = 'next'
