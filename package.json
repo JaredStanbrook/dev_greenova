@@ -13,6 +13,14 @@
     "hyperscript.org": "0.9.14",
     "tailwindcss": "4.1.1"
   },
+  "engines": {
+    "node": "18.20.7"
+  },
+  "packageManager": "npm@10.8.2",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.0",
     "@eslint/js": "9.22.0",
