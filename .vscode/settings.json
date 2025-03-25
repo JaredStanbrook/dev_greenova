@@ -1188,22 +1188,187 @@
       "path": "${workspaceFolder}/Makefile"
     }
   ],
-  "yaml.completion": true,
-  "yaml.validate": true,
-  "yaml.format.enable": true,
+  "makefile.makePath": "make",
+  "makefile.makefilePath": "${workspaceFolder}/Makefile",
+  "markdown.validate.enabled": true,
+  "markdownlint.configFile": "/workspaces/greenova/.markdownlint.json",
+  "markdownlint.run": "onType",
+  "mypy-type-checker.args": [
+    "--configuration",
+    "${workspaceFolder}/mypy.ini"
+  ],
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "mypy-type-checker.interpreter": [
+    "${workspaceFolder}/.venv/bin/python3.9"
+  ],
+  "mypy-type-checker.path": [
+    "/usr/local/py-utils/bin/mypy"
+  ],
+  "mypy-type-checker.preferDaemon": true,
+  "mypy-type-checker.reportingScope": "file",
+  "prettier.configPath": "/workspaces/greenova/.prettierrc",
+  "prettier.enable": true,
+  "prettier.endOfLine": "lf",
+  "prettier.jsxSingleQuote": true,
+  "prettier.useEditorConfig": true,
+  "problems.decorations.enabled": true,
+  "problems.defaultViewMode": "table",
+  "problems.showCurrentInStatus": true,
+  "problems.sortOrder": "severity",
+  "problems.visibility": true,
   "protoc": {
-    "path": "/usr/local/bin/protoc",
     "lint": {
       "enabled": true,
       "path": "/usr/local/bin/protolint"
-    }
+    },
+    "path": "/usr/local/bin/protoc"
   },
   "protolint.path": "/usr/local/bin/protolint",
+  "pylint.enabled": true,
+  "pylint.importStrategy": "fromEnvironment",
+  "pylint.interpreter": [
+    "${workspaceFolder}/.venv/bin/python3.9"
+  ],
+  "pylint.path": [
+    "/usr/local/py-utils/bin/pylint"
+  ],
+  "python.REPL.enableREPLSmartSend": true,
+  "python.REPL.sendToNativeREPL": true,
+  "python.analysis.aiCodeActions": {
+    "enabled": true
+  },
+  "python.analysis.autoFormatStrings": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoIndent": true,
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": "error",
+    "reportMissingModuleSource": "none",
+    "reportMissingTypeStubs": "warning",
+    "reportPrivateUsage": "warning",
+    "reportUnknownArgumentType": "warning",
+    "reportUnknownLambdaType": "warning",
+    "reportUnknownMemberType": "warning",
+    "reportUnknownParameterType": "warning",
+    "reportUnknownVariableType": "warning",
+    "reportUntypedFunctionDecorator": "warning",
+    "reportUnusedCoroutine": "warning"
+  },
+  "python.analysis.enablePytestSupport": false,
+  "python.analysis.exclude": [
+    "**/__pycache__",
+    "**/.pytest_cache",
+    "**/.mypy_cache",
+    "**/.venv",
+    "**/node_modules",
+    "**/.vscode-server"
+  ],
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/.venv/lib/python3.9/site-packages",
+    "${workspaceFolder}/greenova"
+  ],
+  "python.analysis.fixAll": [
+    "source.unusedImports",
+    "source.convertImportFormat"
+  ],
+  "python.analysis.generateWithTypeAnnotation": true,
+  "python.analysis.ignore": [
+    "**/__pycache__",
+    "**/.pytest_cache",
+    "**/.mypy_cache",
+    "**/.venv",
+    "**/node_modules",
+    "**/.vscode-server",
+    "**/.github",
+    "**/.git",
+    "**/.devcontainer",
+    "**/docs"
+  ],
+  "python.analysis.importFormat": "absolute",
+  "python.analysis.indexing": true,
+  "python.analysis.inlayHints.functionReturnTypes": false,
+  "python.analysis.inlayHints.variableTypes": false,
+  "python.analysis.languageServerMode": "full",
+  "python.analysis.logLevel": "Error",
+  "python.analysis.packageIndexDepths": [
+    {
+      "depth": 2,
+      "name": "django"
+    }
+  ],
+  "python.analysis.persistAllIndices": true,
+  "python.analysis.regenerateStdLibIndices": true,
+  "python.analysis.stubPath": "${workspaceFolder}/.venv/lib/python3.9/site-packages/django-stubs",
+  "python.analysis.supportDocstringTemplate": true,
+  "python.analysis.supportRestructuredText": true,
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.typeshedPaths": [
+    "${workspaceFolder}/.venv/lib/python3.9/site-packages/django-stubs",
+    "${workspaceFolder}/.venv/lib/python3.9/site-packages/django-stubs-ext"
+  ],
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.createEnvironment.contentButton": "show",
+  "python.createEnvironment.trigger": "prompt",
+  "python.defaultInterpreterPath": "python3.9",
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.globalModuleInstallation": false,
+  "python.languageServer": "Pylance",
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.executeInFileDir": true,
+  "python.terminal.focusAfterLaunch": true,
+  "python.terminal.shellIntegration.enabled": true,
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
+  "python.testing.promptToConfigure": true,
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "./greenova",
+    "-p",
+    "*test*.py"
+  ],
+  "python.testing.unittestEnabled": true,
+  "shellcheck.disableVersionCheck": true,
+  "shellcheck.enable": true,
+  "shellcheck.enableQuickFix": true,
+  "shellcheck.executablePath": "shellcheck",
+  "shellcheck.run": "onType",
+  "shellformat.effectLanguages": [
+    "shellscript",
+    "dockerfile",
+    "dotenv",
+    "hosts",
+    "ignore",
+    "gitignore",
+    "properties"
+  ],
+  "shellformat.path": "/usr/local/bin/shfmt",
+  "shellformat.useEditorConfig": true,
+  "snyk.features.codeQuality": true,
+  "snyk.features.codeSecurity": true,
+  "snyk.features.infrastructureAsCode": true,
+  "snyk.features.openSourceSecurity": true,
+  "snyk.scanningMode": "auto",
+  "snyk.trustedFolders": [
+    "./greenova",
+    "/home/vscode/dotfiles"
+  ],
   "tailwindCSS.codeActions": true,
   "tailwindCSS.codeLens": true,
   "tailwindCSS.includeLanguages": {
     "django-html": "html"
   },
   "tailwindCSS.suggestions": true,
-  "tailwindCSS.validate": true
+  "tailwindCSS.validate": true,
+  "task.reconnection": true,
+  "terminal.integrated.shellIntegration.enabled": true,
+  "typescript.suggest.enabled": false,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.editor.enablePreview": false,
+  "yaml.completion": true,
+  "yaml.format.enable": true,
+  "yaml.validate": true
 }
