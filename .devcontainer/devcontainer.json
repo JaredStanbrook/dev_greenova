@@ -101,6 +101,7 @@
           "*.py": "python",
           "*.toml": "toml",
           "*.txt": "plaintext",
+          ".bandit": "yaml",
           ".env*": "dotenv",
           ".pylintrc": "ini",
           ".pylintrc-django": "ini",
