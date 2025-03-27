@@ -173,55 +173,11 @@
   height: auto; /* Ensure height is based on content */
 }
 
-#chat-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: 2rem;
-  background-color: var(--greenova-green-primary);
-  color: var(--greenova-text-primary-light);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-  border: none;
-  cursor: pointer;
-  margin: 0; /* Reset any margin that might affect positioning */
-  min-height: unset; /* Override min-height from button.css */
-  max-height: unset; /* Override max-height from button.css */
-}
-
-#chat-toggle:hover,
-#chat-toggle:focus {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-#chat-toggle svg {
-  stroke: currentColor;
-}
-
-/* Ensure the dialog appears properly positioned */
-.chat-dialog-modal {
-  max-width: 400px;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 0;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  max-height: 80vh;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
+/* Chat dialog which represents some message */
+.chat-dialog {
+  margin: var(--greenova-spacing-small);
+  border: 4px solid var(--greenova-beige-primary);
+  padding: var(--greenova-padding-small) var(--greenova-padding);
 
 .chat-container-header {
   padding: var(--greenova-padding);

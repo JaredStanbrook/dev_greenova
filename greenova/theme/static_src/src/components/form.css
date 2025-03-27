@@ -79,6 +79,7 @@ select[aria-busy='true'][disabled][data-loading-disable-data-loading-aria-busy] 
   margin-bottom: 0;
   cursor: pointer;
 }
+
 .checkbox-group input[type='checkbox'] {
   width: auto;
   margin: 0;
@@ -159,6 +160,7 @@ button[aria-busy='true'] {
   position: relative;
   color: transparent;
 }
+
 button[aria-busy='true']::after {
   content: '';
   position: absolute;
