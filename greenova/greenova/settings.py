@@ -17,6 +17,7 @@ from shutil import which
 import sys
 from typing import Dict, List, TypedDict, Union
 
+from django_components import ComponentsSettings
 from dotenv_vault import load_dotenv
 import sentry_sdk
 
@@ -149,6 +150,7 @@ INSTALLED_APPS = [
     "django_htmx",
     "django_hyperscript",
     "django_matplotlib",
+    "django_components",
     "template_partials",
     "tailwind",
     "django_browser_reload",
@@ -238,7 +240,6 @@ TEMPLATES: List[TemplateConfig] = [
             BASE_DIR / "authentication",  # route to custom django-allauth template!
             BASE_DIR / "templates",
         ],
-        "APP_DIRS": True,  # Keep this for app template discovery
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -246,11 +247,35 @@ TEMPLATES: List[TemplateConfig] = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            "loaders": [
+                (
+                    "django.template.loaders.cached.Loader",
+                    [
+                        # Default Django loader
+                        "django.template.loaders.filesystem.Loader",
+                        # Including this is the same as APP_DIRS=True
+                        "django.template.loaders.app_directories.Loader",
+                        # Components loader
+                        "django_components.template_loader.Loader",
+                    ],
+                )
+            ],
+            "builtins": [
+                "django_components.templatetags.component_tags",
+            ],
             "debug": DEBUG,
         },
     },
 ]
 
+# Components
+# https://django-components.github.io/django-components/latest/overview/installation/
+COMPONENTS = ComponentsSettings(
+    dirs=[
+        ...,
+        Path(BASE_DIR) / "components",
+    ],
+)
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 

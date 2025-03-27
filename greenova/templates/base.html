@@ -13,12 +13,9 @@ user_tags %} {% load core_tags %}
     />
     <meta
       name="description"
-      content=" {% block meta_description %}Environmental Compliance Management System{% endblock meta_description %} "
+      content=" {% block meta_description %} Environmental Compliance Management System {% endblock meta_description %}"
     />
-    <title>
-      {% block title %} {% block page_title %} Greenova {% endblock page_title
-      %} {% endblock title %}
-    </title>
+    <title>{% block title %} Greenova {% endblock title %}</title>
     {% tailwind_css %} {% block extra_head %} {% endblock extra_head %}
   </head>
   <body
