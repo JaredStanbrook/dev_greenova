@@ -31,7 +31,11 @@
         "Plex.vscode-protolint",
         "bradlc.vscode-tailwindcss",
         "pycqa.bandit-pycqa",
-        "mtxr.sqltools"
+        "mtxr.sqltools",
+        "ms-vscode.vscode-copilot-data-analysis",
+        "bmalehorn.vscode-fish",
+        "willumz.generic-pseudocode",
+        "stylelint.vscode-stylelint"
       ],
       "settings": {
         "[django-html]": {
