@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-  Procedure Analysis for {{ mechanism.name }}
+  procedure analysis for {{ mechanism.name }}
 {% endblock title %}
-{% block body %}
+{% block content %}
   <article>
     <header>
       <hgroup>
@@ -206,7 +206,9 @@
 
     if (direction === 'left') {
       container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    } else {
+    }
+
+ else {
       container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   }
@@ -216,10 +218,13 @@
     if (el.style.display === 'none') {
       el.style.display = display;
       el.previousElementSibling.querySelector('.btn-fold').textContent = '-';
-    } else {
+    }
+
+ else {
       el.style.display = 'none';
       el.previousElementSibling.querySelector('.btn-fold').textContent = '+';
     }
   }
+
   </script>
-{% endblock body %}
+{% endblock content %}

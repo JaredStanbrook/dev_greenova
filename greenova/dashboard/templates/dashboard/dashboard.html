@@ -1,4 +1,4 @@
-{% extends base_template|default:"base.html" %}
+{% extends base_template|default:"base.html" %extendsbase_template|defaultextendsbase_template|default}
 {% load static dashboard_tags partials hyperscript project_tags %}
 <!-- Define the partial content first -->
 {% partialdef dashboard_header %}
@@ -21,7 +21,7 @@
 {% include "projects/projects_selector.html" %}
 {% endpartialdef project_selection %}
 {% if projects %}
-  {% with project_list=projects|map:"to_dict"|to_list %}
+  {% with project_list=projects|map:"to_dict"|to_list %withproject_list=projects|mapwithproject_list=projects|map}
     {% hs_dump project_list 'availableProjects' scope='element' %}
   {% endwith %}
   {% hs_dump user_roles 'userRoles' scope='element' %}
@@ -43,14 +43,14 @@
 </div>
 {% endpartialdef %}
 <!-- Now use the defined partials -->
-{% block body %}
+{% block content %}
   <article hx-ext="class-tools path-deps" classes="add fade-in">
     {% partial dashboard_header %}
     {% partial project_selection %}
     {% partial data_container %}
   </article>
   <!-- Add script to initialize project selection and data loading -->
-{% endblock body %}
+{% endblock content %}
 {% block footer %}
   <footer role="contentinfo" hx-ext="class-tools" classes="add fade-in:1s">
     <p>

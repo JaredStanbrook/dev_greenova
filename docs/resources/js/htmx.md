@@ -348,7 +348,7 @@ INSTALLED_APPS = [
 #### 2. Define Partials in Your Templates
 
 ```html
-{% extends "_base.html" %} {% load partials %} {% block body %}
+{% extends "_base.html" %} {% load partials %} {% block content %}
 <h1>Countries</h1>
 
 {% partialdef country-table inline %}
@@ -371,7 +371,7 @@ INSTALLED_APPS = [
 {% endpartialdef %}
 
 <!-- The table will render here due to 'inline' parameter -->
-{% endblock body %}
+{% endblock content %}
 ```
 
 The `inline` argument makes the partial render when the full page renders.
@@ -400,7 +400,8 @@ the entire template.
     )
 ```
 
-HTMX requests will render only the partial, while full page requests will render the entire template.
+HTMX requests will render only the partial, while full page requests will
+render the entire template.
 
 ### Swapping the Base Template
 
@@ -435,7 +436,7 @@ def partial_rendering(request):
 #### 2. In Your Template (page.html)
 
 ```html
-{% extends base_template %} {% block body %}
+{% extends base_template %} {% block content %}
 <!-- Content that will be rendered in both full page and HTMX requests -->
 <div id="items-container">
   {% for item in items %}
@@ -456,7 +457,7 @@ def partial_rendering(request):
         <!-- Navigation items -->
       </nav>
     </header>
-    <main id="main">{% block body %}{% endblock body %}</main>
+    <main id="main">{% block content %}{% endblock content %}</main>
     <footer>
       <!-- Footer content -->
     </footer>
@@ -465,7 +466,7 @@ def partial_rendering(request):
         <!-- Navigation items -->
       </nav>
     </header>
-    <main id="main">{% block body %}{% endblock %}</main>
+    <main id="main">{% block content %}{% endblock %}</main>
     <footer>
       <!-- Footer content -->
 This technique ensures HTMX requests receive only the necessary HTML, reducing
@@ -481,7 +482,8 @@ Partial template (\_partial.html):
   {% include "partials/results.html" %}
 </div>
 
-This technique ensures HTMX requests receive only the necessary HTML, reducing payload size and improving performance.
+This technique ensures HTMX requests receive only the necessary HTML, reducing
+payload size and improving performance.
 
 ## Common Use Cases
 
@@ -535,11 +537,13 @@ This technique ensures HTMX requests receive only the necessary HTML, reducing p
 
 ## Best Practices
 
-1. **Use Request.HTMX**: Check `request.htmx` to determine if a request came from HTMX.
+1. **Use Request.HTMX**: Check `request.htmx` to determine if a request came
+   from HTMX.
 
 2. **Keep Templates DRY**: Use template partials for HTMX responses.
 
-3. **Proper Error Handling**: Return appropriate HTTP status codes for HTMX requests.
+3. **Proper Error Handling**: Return appropriate HTTP status codes for HTMX
+   requests.
 
 4. **Accessibility**: Ensure your UI remains accessible when using HTMX.
 
@@ -584,7 +588,9 @@ Django applications.
 
 ## HTMX Extensions
 
-HTMX provides extensions that add additional functionality beyond its core features. These extensions can be particularly useful for specific use cases in Django applications.
+HTMX provides extensions that add additional functionality beyond its core
+features. These extensions can be particularly useful for specific use cases in
+Django applications.
 
 ### How to Use Extensions
 
@@ -608,7 +614,8 @@ Then initialize it:
 
 ### Head Support Extension
 
-The [Head Support Extension](https://htmx.org/extensions/head-support/) allows you to update the `<head>` of your document with content from HTMX responses.
+The [Head Support Extension](https://htmx.org/extensions/head-support/) allows
+you to update the `<head>` of your document with content from HTMX responses.
 
 #### Use Cases
 
@@ -640,7 +647,10 @@ The [Head Support Extension](https://htmx.org/extensions/head-support/) allows y
 
 ### Loading States Extension
 
-The [Loading States Extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/loading-states/README.md) provides sophisticated loading states for HTMX requests, beyond the basic indicators.
+The
+[Loading States Extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/loading-states/README.md)
+provides sophisticated loading states for HTMX requests, beyond the basic
+indicators.
 
 #### Features
 
@@ -679,15 +689,16 @@ provides additional class manipulation tools for HTML elements.
 
 ### Class Tools Extension
 
-The [Class Tools Extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/class-tools/README.md) provides additional class manipulation tools for HTML elements.
+The
+[Class Tools Extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/class-tools/README.md)
+provides additional class manipulation tools for HTML elements.
 
 #### Key Features
 
 - Add/remove classes after delays
 - Create complex class addition/removal sequences
-- Simplifies UI transitions and animations
-  classes="add saving:mousedown remove saving:htmx:afterOnLoad
-  add saved:htmx:afterOnLoad remove saved:3s"
+- Simplifies UI transitions and animations classes="add saving:mousedown remove
+  saving:htmx:afterOnLoad add saved:htmx:afterOnLoad remove saved:3s"
 
 #### Example with Django
 
@@ -717,7 +728,9 @@ allows you to define dependencies between HTMX requests based on path patterns.
 
 ### Path Dependencies Extension
 
-The [Path Dependencies Extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/path-deps/README.md) allows you to define dependencies between HTMX requests based on path patterns.
+The
+[Path Dependencies Extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/path-deps/README.md)
+allows you to define dependencies between HTMX requests based on path patterns.
 
 #### Benefits
 
@@ -775,4 +788,8 @@ def add_comment(request, post_id):
 
 ## Conclusion
 
-HTMX with Django provides a powerful way to create dynamic, interactive web applications with minimal JavaScript. By leveraging Django's templating system alongside HTMX's declarative approach to AJAX, you can build modern user experiences while maintaining the simplicity and robustness of server-rendered HTML.
+HTMX with Django provides a powerful way to create dynamic, interactive web
+applications with minimal JavaScript. By leveraging Django's templating system
+alongside HTMX's declarative approach to AJAX, you can build modern user
+experiences while maintaining the simplicity and robustness of server-rendered
+HTML.

@@ -1,158 +1,42 @@
+@import 'tailwindcss';
+
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: 'mytheme';
+  default: true; /* set as default */
+  prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
+  color-scheme: light; /* color of browser-provided UI */
+
+  --color-base-100: oklch(98% 0.02 240deg);
+  --color-base-200: oklch(95% 0.03 240deg);
+  --color-base-300: oklch(92% 0.04 240deg);
+  --color-base-content: oklch(20% 0.05 240deg);
+  --color-primary: oklch(55% 0.3 240deg);
+  --color-primary-content: oklch(98% 0.01 240deg);
+  --color-secondary: oklch(70% 0.25 200deg);
+  --color-secondary-content: oklch(98% 0.01 200deg);
+  --color-accent: oklch(65% 0.25 160deg);
+  --color-accent-content: oklch(98% 0.01 160deg);
+  --color-neutral: oklch(50% 0.05 240deg);
+  --color-neutral-content: oklch(98% 0.01 240deg);
+  --color-info: oklch(70% 0.2 220deg);
+  --color-info-content: oklch(98% 0.01 220deg);
+  --color-success: oklch(65% 0.25 140deg);
+  --color-success-content: oklch(98% 0.01 140deg);
+  --color-warning: oklch(80% 0.25 80deg);
+  --color-warning-content: oklch(20% 0.05 80deg);
+  --color-error: oklch(65% 0.3 30deg);
+  --color-error-content: oklch(98% 0.01 30deg);
+}
+
+@import url('vendor/pico-classless.min.css');
+
 /**
- * Greenova Tailwind CSS Integration
- *
- * This file configures Tailwind CSS as a secondary framework to PicoCSS.
- * Following Greenova's HTML-first approach with progressive enhancement.
- * Tailwind is only used for specialized UI components when PicoCSS cannot
- * handle the requirements.
- */
-/* Only include Tailwind base for reset normalization that doesn't conflict with PicoCSS */
-@tailwind base;
-
-/* Only include components absolutely necessary - PicoCSS handles most UI components */
-@tailwind components;
-
-@layer components {
-  /* Base styles */
-  @import './base.css';
-
-  /* Design variables */
-  @import './defines/design.css';
-  @import './defines/pico-compat.css';
-  @import './defines/colours.css';
-
-  /* Theme-specific colors */
-  @import './themes/light.css';
-  @import './themes/dark.css';
-
-  /* Core structural components */
-  @import './components/navigation.css';
-  @import './components/breadcrumbs.css';
-  @import './components/button.css';
-  @import './components/card.css';
-
-  /* Import PicoCSS */
-  @import './vendor/pico-classless.min.css';
-
-  /* Form and interactive elements */
-  @import './components/form.css';
-  @import './components/filter.css';
-  @import './components/pagination.css';
-
-  /* Content-specific components */
-  @import './components/list.css';
-  @import './components/charts.css';
-  @import './components/chat.css';
-  @import './components/obligations.css';
-
-  /* Module-specific styles */
-  @import './components/user-profile.css';
-  @import './components/company.css';
-}
-
-/* Utilities are the main benefit of Tailwind in our architecture */
-@tailwind utilities;
-
-/* Custom Tailwind utilities for Greenova specialized components */
-@layer utilities {
-  /* Accessibility utilities */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  /* Text balance utilities for headings */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
-
-  /* Advanced grid utilities */
-  .grid-auto-fit {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--min-col-width, 250px), 1fr)
-    );
-  }
-
-  /* Specialized flex patterns */
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Accessibility focus indicators that match Greenova's design system */
-  .focus-greenova {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
-    --tw-ring-color: var(--greenova-green-primary);
-    --tw-ring-offset-width: 2px;
-  }
-
-  /* Chat UI utilities */
-  .chat-user-bubble {
-    border-radius: var(--greenova-chat-user-border-radius);
-    background-color: var(--greenova-chat-user-background);
-    color: var(--greenova-chat-user-color);
-  }
-
-  .chat-bot-bubble {
-    border-radius: var(--greenova-chat-bot-border-radius);
-    background-color: var(--greenova-chat-bot-background);
-    color: var(--greenova-chat-bot-color);
-  }
-
-  /* Advanced animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-  }
-
-  .animate-slide-in {
-    animation: slideIn 0.3s ease-in-out;
-  }
-
-  /* HTMX loading indicator utilities */
-  .htmx-indicator {
-    opacity: 0;
-    transition: opacity 200ms ease-in;
-  }
-
-  .htmx-request .htmx-indicator {
-    opacity: 1;
-  }
-
-  .htmx-request.htmx-indicator {
-    opacity: 1;
-  }
-}
-
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
