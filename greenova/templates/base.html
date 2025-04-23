@@ -45,15 +45,7 @@
     </title>
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
-    <!-- Critical CSS -->
-    <link rel="preload"
-          href="{% static 'css/critical-styles.css' %}"
-          as="style" />
-    <!-- CSS files -->
-    <link rel="stylesheet" href="{% static 'css/critical-styles.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-{% tailwind_css %}
-
+    {% tailwind_css %}
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
@@ -67,6 +59,7 @@
 
  -->
     <!-- Header with semantic nav -->
+     
     <header role="banner">
 
       {% block header %}
@@ -89,22 +82,18 @@
               <li role="none" class="menubar-breadcrumbs">
                 <nav aria-label="Primary navigation" role="navigation">
                   <ul>
-                    {% if request.resolver_match.namespace == 'dashboard' %}
+                    <li>
+                      <a href="{% url 'dashboard:home' %}"
+                         role="menuitem"
+                         aria-current="{% if request.resolver_match.namespace == 'dashboard' %} page {% endif %}"
+                         _="on load if location.pathname is '{% url 'dashboard:home' %}' then hide me">Dashboard</a>
+                    </li>
+                    {% if request.resolver_match.namespace != 'dashboard' %}
+
                       <li>
                         <a href="{% url 'dashboard:home' %}"
                            role="menuitem"
-                           aria-current="{% if request.resolver_match.namespace == 'dashboard' %}
-                                           page
-                                         {% endif %}"
-                           _="on load if location.pathname is '{% url 'dashboard:home' %}' then hide me">Dashboard</a>
-                      </li>
-                    {% else %}
-                      <li>
-                        <a href="{% url 'dashboard:home' %}"
-                           role="menuitem"
-                           aria-current="{% if request.resolver_match.namespace == 'dashboard' %}
-                                           page
-                                         {% endif %}"
+                           aria-current="{% if request.resolver_match.namespace == 'dashboard' %} page {% endif %}"
                            _="on load if location.pathname is '{% url 'dashboard:home' %}' then hide me">Dashboard</a>
                       </li>
                     {% endif %}
@@ -122,15 +111,11 @@
 {% chat_widget %}
                 <a href="{% url 'users:profile' %}"
                    role="menuitem"
-                   {% if request.path == '/users/profile/' %}
-                     aria-current="page"
-                   {% endif %}>Profile</a>
+                   {% if request.path == '/users/profile/' %}aria-current="page"{% endif %}>Profile</a>
                 {% if request.user.is_staff %}
                   <a href="{% url 'company:list' %}"
                      role="menuitem"
-                     {% if '/company/' in request.path %}
-                       aria-current="page"
-                     {% endif %}>Companies</a>
+                     {% if '/company/' in request.path %}aria-current="page"{% endif %}>Companies</a>
                 {% endif %}
                 <!-- Logout -->
                 <a href="#"

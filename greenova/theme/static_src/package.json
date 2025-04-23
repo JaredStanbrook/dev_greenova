@@ -1,7 +1,8 @@
 {
   "author": "",
   "dependencies": {
-    "autoprefixer": "^10.4.21"
+    "autoprefixer": "^10.4.21",
+    "daisyui": "^5.0.27"
   },
   "description": "",
   "devDependencies": {
