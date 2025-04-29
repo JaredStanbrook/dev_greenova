@@ -1,127 +1,122 @@
-/**
- * Greenova Tailwind CSS Integration
- *
- * This file configures Tailwind CSS as a secondary framework to PicoCSS.
- * Following Greenova's HTML-first approach with progressive enhancement.
- * Tailwind is only used for specialized UI components when PicoCSS cannot
- * handle the requirements.
- */
-
-/* Only include Tailwind base for reset normalization that doesn't conflict with PicoCSS */
-@tailwind base;
-
-/* Only include components absolutely necessary - PicoCSS handles most UI components */
-@tailwind components;
-
-/* Utilities are the main benefit of Tailwind in our architecture */
-@tailwind utilities;
-
-/* Custom Tailwind utilities for Greenova specialized components */
-@layer utilities {
-  /* Accessibility utilities */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  /* Text balance utilities for headings */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
-
-  /* Advanced grid utilities */
-  .grid-auto-fit {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--min-col-width, 250px), 1fr)
-    );
-  }
-
-  /* Specialized flex patterns */
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Accessibility focus indicators that match Greenova's design system */
-  .focus-greenova {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
-
-    --tw-ring-color: var(--greenova-green-primary);
-    --tw-ring-offset-width: 2px;
-  }
-
-  /* Chat UI utilities */
-  .chat-user-bubble {
-    border-radius: var(--greenova-chat-user-border-radius);
-    background-color: var(--greenova-chat-user-background);
-    color: var(--greenova-chat-user-color);
-  }
-
-  .chat-bot-bubble {
-    border-radius: var(--greenova-chat-bot-border-radius);
-    background-color: var(--greenova-chat-bot-background);
-    color: var(--greenova-chat-bot-color);
-  }
-
-  /* Advanced animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-  }
-
-  .animate-slide-in {
-    animation: slideIn 0.3s ease-in-out;
-  }
-
-  /* HTMX loading indicator utilities */
-  .htmx-indicator {
-    opacity: 0;
-    transition: opacity 200ms ease-in;
-  }
-
-  .htmx-request .htmx-indicator {
-    opacity: 1;
-  }
-
-  .htmx-request.htmx-indicator {
-    opacity: 1;
-  }
-}
-
+@import 'tailwindcss';
 @plugin "daisyui";
-@import url('vendor/pico-classless.min.css');
+@plugin "daisyui/theme" {
+  name: 'light';
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
 
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+  /* Backgrounds */
+  --color-base-100: oklch(
+    97.5% 0.015 140
+  ); /* --greenova-background-primary (#f5f7f2) */
+  --color-base-200: oklch(
+    94.5% 0.02 140
+  ); /* --greenova-background-secondary (#e8ede3) */
+  --color-base-content: oklch(
+    15% 0 0
+  ); /* --greenova-text-primary-dark (#000) */
 
-  to {
-    opacity: 1;
-  }
+  /* Primary (green primary) */
+  --color-primary: oklch(50% 0.16 140); /* #6a784e */
+  --color-primary-content: oklch(98% 0 0); /* #fff */
+
+  /* Secondary (green secondary) */
+  --color-secondary: oklch(72% 0.1 140); /* #a5b485 */
+  --color-secondary-content: oklch(15% 0 0); /* #000 */
+
+  /* Accent (beige primary) */
+  --color-accent: oklch(85% 0.05 80); /* #d8ccba */
+  --color-accent-content: oklch(15% 0 0); /* #000 */
+
+  /* Neutral (green tertiary or beige secondary) */
+  --color-neutral: oklch(40% 0.05 140); /* #505a3d */
+  --color-neutral-content: oklch(98% 0 0); /* #fff */
+
+  /* Info / Success / Warning / Error - you can adjust as needed */
+  --color-info: oklch(75% 0.2 220); /* calm blue */
+  --color-info-content: oklch(98% 0 220);
+  --color-success: oklch(65% 0.25 140); /* earthy green */
+  --color-success-content: oklch(98% 0 140);
+  --color-warning: oklch(85% 0.2 80); /* muted orange-yellow */
+  --color-warning-content: oklch(25% 0.05 80);
+  --color-error: oklch(60% 0.25 30); /* muted red */
+  --color-error-content: oklch(98% 0.01 30);
+
+  /* Radius and Sizes */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
 }
+@plugin "daisyui/theme" {
+  name: 'dark';
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
 
-@keyframes slideIn {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
+  /* Backgrounds */
+  --color-base-100: oklch(
+    27% 0.02 140
+  ); /* --greenova-background-primary (#2c3328) */
+  --color-base-200: oklch(
+    37% 0.02 140
+  ); /* --greenova-background-secondary (#3d4d36) */
+  --color-base-content: oklch(
+    98% 0.01 0
+  ); /* --greenova-text-primary-dark (#fff) */
 
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  /* Primary (green primary) */
+  --color-primary: oklch(75% 0.12 140); /* #b5c29a */
+  --color-primary-content: oklch(10% 0.01 140); /* dark text on light green */
+
+  /* Secondary (green secondary) */
+  --color-secondary: oklch(45% 0.08 140); /* #5a6a4b */
+  --color-secondary-content: oklch(98% 0 0); /* white */
+
+  /* Accent (beige primary) */
+  --color-accent: oklch(78% 0.06 80); /* #c0b0a0 */
+  --color-accent-content: oklch(15% 0 0); /* #000 */
+
+  /* Neutral (green tertiary or beige secondary) */
+  --color-neutral: oklch(40% 0.05 140); /* #4d5741 */
+  --color-neutral-content: oklch(95% 0.01 0); /* light text */
+
+  /* Info / Success / Warning / Error - Optional: can be kept similar to light */
+  --color-info: oklch(70% 0.2 220);
+  --color-info-content: oklch(98% 0 0);
+  --color-success: oklch(60% 0.2 140);
+  --color-success-content: oklch(98% 0 0);
+  --color-warning: oklch(75% 0.15 80);
+  --color-warning-content: oklch(15% 0 0);
+  --color-error: oklch(60% 0.2 30);
+  --color-error-content: oklch(98% 0 0);
+
+  /* Radius and Sizes */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
 }
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
