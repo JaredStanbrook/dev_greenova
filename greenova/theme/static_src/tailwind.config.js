@@ -14,15 +14,6 @@ module.exports = {
     './greenova/*/templates/**/*.html',
   ],
 
-  // Important: This ensures Tailwind doesn't override PicoCSS
-  important: false,
-
-  // Disable core plugins that PicoCSS already handles well
-  corePlugins: {
-    preflight: false, // PicoCSS handles normalization
-    container: false, // PicoCSS handles containers
-  },
-
   theme: {
     extend: {},
   },

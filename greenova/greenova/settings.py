@@ -131,6 +131,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     # Third-party authentication (keep together)
+    "allauth_ui",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -150,9 +151,11 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'pb_model',
     'silk',
+    "widget_tweaks",
+    "slippers",
 
     # Your local apps (ordered by dependency)
-    'authentication',
+    
     'core.apps.CoreConfig',  # Core logic, should be initialized early
     'company',  # Base models (used in other apps, so placed first)
     'projects',  # Likely depends on `company`
@@ -210,6 +213,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+ALLAUTH_UI_THEME = "light"
 MFA_SUPPORTED_TYPES = ['totp', 'recovery_codes']
 LOGIN_REDIRECT_URL = 'dashboard:home'
 LOGOUT_REDIRECT_URL = 'landing:home'
@@ -237,7 +241,6 @@ TEMPLATES: List[TemplateConfig] = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'authentication',  # route to custom django-allauth template!
             BASE_DIR / 'templates',
         ],
         'APP_DIRS': True,  # Keep this for app template discovery
@@ -246,7 +249,7 @@ TEMPLATES: List[TemplateConfig] = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages',            
             ],
             'debug': DEBUG,
         },

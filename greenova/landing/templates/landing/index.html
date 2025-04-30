@@ -5,102 +5,100 @@
 {% endblock %}
 
 {% block content %}
-<article class="container mx-auto px-4 py-8 bg-base-200 text-base-content rounded-box">
-    <!-- Header Section -->
-    <header class="text-center mb-8 bg-base-200">
-      <hgroup>
-        <h1 class="text-4xl font-bold mb-2">Welcome to Greenova</h1>
-        <h2 class="text-xl">Environmental Compliance Management System</h2>
-      </hgroup>
-      <p class="mt-4">
-        At Enveng Group, we are committed to making environmental compliance on major capital projects easier and more transparent. 
-        Our innovative app is designed to streamline the management of environmental regulations, ensuring that your projects not 
-        only meet but exceed compliance standards, commitments, and obligations.
-      </p>
-    </header>
+  <!-- Header Section -->
+  <header class="text-center mb-8 bg-base-200">
+    <hgroup>
+      <h1 class="text-4xl font-bold mb-2">Welcome to Greenova</h1>
+      <h2 class="text-xl">Environmental Compliance Management System</h2>
+    </hgroup>
+    <p class="mt-4">
+      At Enveng Group, we are committed to making environmental compliance on major capital projects easier and more transparent. 
+      Our innovative app is designed to streamline the management of environmental regulations, ensuring that your projects not 
+      only meet but exceed compliance standards, commitments, and obligations.
+    </p>
+  </header>
 
-    <!-- Landing Page Navigation -->
-    <section class="text-center mb-12">
-      <nav class="{% if not user_authenticated %}block{% else %}hidden{% endif %}">
-        <a href="{% url 'account_signup' %}" class="btn btn-primary mr-4">Get Started</a>
-        <a href="#features" role="button" class="btn btn-outline">Learn More</a>
-      </nav>
-    </section>
+  <!-- Landing Page Navigation -->
+  <section class="text-center mb-12">
+    <nav class="{% if not user_authenticated %}block{% else %}hidden{% endif %}">
+      <a href="{% url 'account_signup' %}" class="btn btn-primary mr-4">Get Started</a>
+      <a href="#features" role="button" class="btn btn-outline">Learn More</a>
+    </nav>
+  </section>
 
-    <!-- Mission Section -->
-    <section id="mission" aria-labelledby="mission-heading" class="mb-12">
-      <h2 id="mission-heading" class="text-2xl font-semibold mb-4">Our Mission</h2>
-      <p>
-        Our mission is to empower Environmental Managers, environmental consultants, and stakeholders with the tools they need 
-        to efficiently manage environmental compliance. We believe that transparency and ease of use are key to achieving 
-        sustainable and successful projects.
-      </p>
-    </section>
+  <!-- Mission Section -->
+  <section id="mission" aria-labelledby="mission-heading" class="mb-12">
+    <h2 id="mission-heading" class="text-2xl font-semibold mb-4">Our Mission</h2>
+    <p>
+      Our mission is to empower Environmental Managers, environmental consultants, and stakeholders with the tools they need 
+      to efficiently manage environmental compliance. We believe that transparency and ease of use are key to achieving 
+      sustainable and successful projects.
+    </p>
+  </section>
 
-    <!-- Features Section -->
-    <section id="features" aria-labelledby="features-heading" class="mb-12">
-      <h2 id="features-heading" class="text-2xl font-semibold mb-4">Key Features</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">Real-Time Monitoring</h3>
-          <p>Stay updated with real-time data on environmental compliance metrics.</p>
-        </article>
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">Comprehensive Reporting</h3>
-          <p>Generate detailed reports that provide insights into compliance status and areas for improvement.</p>
-        </article>
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">User-Friendly Interface</h3>
-          <p>Navigate through our intuitive interface designed for ease of use and accessibility.</p>
-        </article>
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">Collaboration Tools</h3>
-          <p>Facilitate seamless communication and collaboration among team members and stakeholders.</p>
-        </article>
-      </div>
-    </section>
+  <!-- Features Section -->
+  <section id="features" aria-labelledby="features-heading" class="mb-12">
+    <h2 id="features-heading" class="text-2xl font-semibold mb-4">Key Features</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">Real-Time Monitoring</h3>
+        <p>Stay updated with real-time data on environmental compliance metrics.</p>
+      </article>
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">Comprehensive Reporting</h3>
+        <p>Generate detailed reports that provide insights into compliance status and areas for improvement.</p>
+      </article>
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">User-Friendly Interface</h3>
+        <p>Navigate through our intuitive interface designed for ease of use and accessibility.</p>
+      </article>
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">Collaboration Tools</h3>
+        <p>Facilitate seamless communication and collaboration among team members and stakeholders.</p>
+      </article>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" aria-labelledby="about-heading" class="mb-12">
-      <h2 id="about-heading" class="text-2xl font-semibold mb-4">Why Choose Us?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">Expertise</h3>
-          <p>
-            Our team consists of industry experts with years of experience in environmental compliance and project management.
-          </p>
-        </article>
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">Innovation</h3>
-          <p>
-            We leverage the latest technology to provide cutting-edge solutions that simplify compliance management.
-          </p>
-        </article>
-        <article class="card shadow-md p-4">
-          <h3 class="text-lg font-bold mb-2">Commitment</h3>
-          <p>
-            We are dedicated to helping you achieve your environmental goals and ensuring the success of your projects.
-          </p>
-        </article>
-      </div>
-    </section>
+  <!-- About Section -->
+  <section id="about" aria-labelledby="about-heading" class="mb-12">
+    <h2 id="about-heading" class="text-2xl font-semibold mb-4">Why Choose Us?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">Expertise</h3>
+        <p>
+          Our team consists of industry experts with years of experience in environmental compliance and project management.
+        </p>
+      </article>
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">Innovation</h3>
+        <p>
+          We leverage the latest technology to provide cutting-edge solutions that simplify compliance management.
+        </p>
+      </article>
+      <article class="card shadow-md p-4">
+        <h3 class="text-lg font-bold mb-2">Commitment</h3>
+        <p>
+          We are dedicated to helping you achieve your environmental goals and ensuring the success of your projects.
+        </p>
+      </article>
+    </div>
+  </section>
 
-    <!-- Get Involved Section -->
-    <section id="get-involved" aria-labelledby="get-involved-heading" class="mb-12">
-      <h2 id="get-involved-heading" class="text-2xl font-semibold mb-4">Get Involved</h2>
-      <p>
-        We are excited to share our journey with you. Stay tuned for updates on our app development and upcoming features. 
-        Join our community and be a part of the movement towards more transparent and efficient environmental compliance management.
-      </p>
-    </section>
+  <!-- Get Involved Section -->
+  <section id="get-involved" aria-labelledby="get-involved-heading" class="mb-12">
+    <h2 id="get-involved-heading" class="text-2xl font-semibold mb-4">Get Involved</h2>
+    <p>
+      We are excited to share our journey with you. Stay tuned for updates on our app development and upcoming features. 
+      Join our community and be a part of the movement towards more transparent and efficient environmental compliance management.
+    </p>
+  </section>
 
-    <!-- Call to Action Section -->
-    <section aria-labelledby="cta-heading" class="text-center">
-      <h2 id="cta-heading" class="text-2xl font-semibold mb-4">Ready to get started?</h2>
-      <p class="mb-4">Join Greenova today and take control of your environmental compliance management.</p>
-      <nav aria-label="Sign up">
-        <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up Now</a>
-      </nav>
-    </section>
-  </article>
+  <!-- Call to Action Section -->
+  <section aria-labelledby="cta-heading" class="text-center">
+    <h2 id="cta-heading" class="text-2xl font-semibold mb-4">Ready to get started?</h2>
+    <p class="mb-4">Join Greenova today and take control of your environmental compliance management.</p>
+    <nav aria-label="Sign up">
+      <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up Now</a>
+    </nav>
+  </section>
 {% endblock content %}

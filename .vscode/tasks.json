@@ -718,6 +718,18 @@
       "type": "shell"
     },
     {
+      "args": ["-c", "cd greenova && python3 manage.py tailwind start"],
+      "command": "/bin/sh",
+      "group": "none",
+      "label": "Django: Run Tailwind Dev",
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
       "args": ["-c", "cd greenova && python3 manage.py runserver"],
       "command": "/bin/sh",
       "group": "none",
