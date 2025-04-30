@@ -8,6 +8,7 @@
 
 module.exports = {
   // Only process files that specifically use Tailwind
+  // ✅ Required for purging with --minify
   content: [
     './greenova/templates/**/*.html',
     './greenova/static/js/**/*.js',

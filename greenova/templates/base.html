@@ -30,6 +30,7 @@
     <title>{% block title %}Greenova{% endblock %}</title>
     <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
     {% tailwind_css %}
+    
     {% block extra_css %}{% endblock %}
   </head>
 
@@ -47,9 +48,10 @@
             <div class="flex-1">
               <ul class="menu menu-horizontal px-1">
                 <a class="btn btn-ghost normal-case text-xl" href="#">Greenova</a>
+                <button data-set-theme="cupcake" data-act-class="ACTIVECLASS">CUPCAKE</button>
                 <label class="swap swap-rotate">
                   <!-- this hidden checkbox controls the state -->
-                  <input type="checkbox" class="theme-controller" value="dark" />
+                  <input type="checkbox" class="theme-controller" value="cupcake" />
                   <!-- sun icon -->
                   <svg
                   class="swap-off h-6 w-6 fill-current"
@@ -200,6 +202,7 @@
     <script src="{% static 'js/app.js' %}" defer></script>
     <script src="{% static 'js/components/foldable.js' %}" defer></script>
     <script src="{% static 'js/components/scrollable.js' %}" defer></script>
+    <script src="{% static 'js/theme-change.js' %}"></script>
     {% block extra_js %}{% endblock extra_js %}
     {% include "chatbot/chat_widget.html" %}
   </body>
