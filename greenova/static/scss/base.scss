@@ -1,0 +1,89 @@
+// Copyright 2025 Enveng Group.
+// SPDX-License-Identifier: 	AGPL-3.0-or-later
+// Theme icons visibility
+[data-theme='light'] {
+  .moon-icon {
+    display: inline-block;
+  }
+
+  .sun-icon {
+    display: none;
+  }
+}
+
+[data-theme='dark'] {
+  .moon-icon {
+    display: none;
+  }
+
+  .sun-icon {
+    display: inline-block;
+  }
+}
+
+// Layout improvements
+header {
+  margin-bottom: 2rem;
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid var(--muted-border-color);
+}
+
+// Logout button styling
+#logout-button {
+  border: 1px solid var(--muted-border-color);
+  opacity: 0.9;
+}
+
+// Loading indicator
+#htmx-indicator {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+#spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 0.25rem solid var(--primary);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner 0.75s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#version {
+  opacity: 0.7;
+  margin-left: 0.5rem;
+}
+
+// Custom breadcrumbs styling for semantic nav
+nav[aria-label='breadcrumbs'] {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: '/';
+      margin: 0 0.5rem;
+      opacity: 0.5;
+    }
+  }
+}

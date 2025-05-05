@@ -1,0 +1,76 @@
+// Copyright 2025 Enveng Group.
+// SPDX-License-Identifier: AGPL-3.0-or-later
+@use 'sass:color';
+@use 'sass:map';
+@forward 'pico';
+@use 'colors' as *;
+@use 'settings' as *;
+@use 'helpers/functions';
+
+$color-mappings: (
+  'greenova': (
+    'base': (
+      'border-radius': 0.5rem,
+      'border-radius-small': 0.25rem,
+      'spacing-large': 0.75rem,
+      'spacing': 0.46875rem,
+      'spacing-small': 0.3125rem,
+      'padding-large': 1.25rem,
+      'padding': 0.625rem,
+      'padding-small': 0.3125rem,
+      'shadow': '0 0.125rem 0.125rem rgb(0 0 0 / 10%)',
+      'title-size': 1.2rem,
+      'subtitle-size': 0.9rem,
+      'text-size': 0.8rem,
+      'input-label': 0.8rem,
+      'input-size': 0.75rem,
+      'table-size': 0.7rem,
+      'button-size': 0.8rem,
+    )
+    'dark': (
+      // Base colors
+      'background-color': #2c3328,
+      'text-color': $zinc-200,
+      'text-selection-color': rgba(#b5c29a, 0.25),
+      // Primary colors
+      'primary': #b5c29a,
+      'primary-background': #5a6a4b,
+      'primary-underline': rgba(#b5c29a, 0.5),
+      'primary-hover': #4d5741,
+      'primary-hover-background': #4d5741,
+      'primary-focus': rgba(#b5c29a, 0.25),
+      'primary-inverse': $white,
+
+      // Component-specific colors
+      'switch-thumb-box-shadow': 0 0 0.5rem rgba(#000, 0.25),
+      'card-background-color': #3d4d36,
+      'card-sectioning-background-color': #5a6a4b,
+    ),
+    'light': (
+      // Base colors
+      'background-color': #f5f7f2,
+      'text-color': $black,
+      'text-selection-color': rgba(#6a784e, 0.25),
+      // Primary colors
+      'primary': #6a784e,
+      'primary-background': #a5b485,
+      'primary-underline': rgba(#6a784e, 0.5),
+      'primary-hover': #505a3d,
+      'primary-hover-background': #505a3d,
+      'primary-focus': rgba(#6a784e, 0.25),
+      'primary-inverse': $white,
+
+      // Component-specific colors
+      'switch-thumb-box-shadow': 0 0 0.5rem rgba(#000, 0.15),
+      'card-background-color': #e8ede3,
+      'card-sectioning-background-color': #3d4d36,
+    ),
+  ),
+);
+
+@function get($key, $mode: 'light') {
+  @return map.get(
+    map.get(map.get($color-mappings, $theme-color), $mode),
+    $key
+  );
+}

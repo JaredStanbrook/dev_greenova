@@ -1,0 +1,16 @@
+// Copyright 2025 Enveng Group.
+// SPDX-License-Identifier: 	AGPL-3.0-or-later
+// Pico lightweight version
+
+// @use 'pico';
+@use 'pico' with (
+  $css-var-prefix: '--greenova-',
+  $enable-semantic-container: true,
+  $enable-classes: false,
+  $theme-color: 'greenova',
+  $modules: (
+    'themes/default': false,
+  )
+);
+@use 'themes/greenova';
+@use 'base';
