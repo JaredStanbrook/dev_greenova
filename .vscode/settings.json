@@ -709,14 +709,6 @@
   "stylelint.packageManager": "npm",
   "stylelint.snippet": ["css"],
   "stylelint.validate": ["css"],
-  "tailwindCSS.codeActions": true,
-  "tailwindCSS.codeLens": true,
-  "tailwindCSS.includeLanguages": {
-    "django-html": "html",
-    "jinja": "html"
-  },
-  "tailwindCSS.suggestions": true,
-  "tailwindCSS.validate": true,
   "task.reconnection": true,
   "terminal.integrated.shellIntegration.enabled": true,
   "typescript.suggest.enabled": false,

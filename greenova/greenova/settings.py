@@ -112,12 +112,6 @@ ALLOWED_HOSTS = [host.strip()
 # Run validation
 validate_settings()
 
-# Tailwind CSS configuration
-TAILWIND_APP_NAME = 'theme'
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -145,7 +139,6 @@ INSTALLED_APPS = [
     'django_matplotlib',
     'django_pdb',
     'template_partials',
-    'tailwind',
     'django_browser_reload',
     'debug_toolbar',
     'pb_model',
@@ -163,7 +156,6 @@ INSTALLED_APPS = [
     'procedures',  # Depends on `obligations`
     'dashboard',  # UI and analytics
     'landing',  # Landing page or homepage
-    'theme',  # UI Styling
     'chatbot',  # Standalone feature, placed last
     'feedback',  # Add the feedback app here
 ]
@@ -416,7 +408,7 @@ if 'runserver' in sys.argv:
     os.environ['PYTHONHTTPSVERIFY'] = '0'
     os.environ.get('DJANGO_SETTINGS_MODULE')
 
-# Configure NPM path for Django Tailwind
+# Configure NPM path
 NPM_BIN_PATH = which('npm')
 
 # Mimetypes configuration

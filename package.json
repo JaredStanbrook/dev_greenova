@@ -18,10 +18,10 @@
     "globals": "16.0.0",
     "prettier": "3.5.3",
     "protolint": "0.52.0",
+    "sass": "1.87.0",
     "stylelint": "16.17.0",
     "stylelint-config-recommended": "15.0.0",
-    "stylelint-config-standard": "37.0.0",
-    "stylelint-config-tailwindcss": "1.0.0"
+    "stylelint-config-standard": "37.0.0"
   },
   "engines": {
     "node": "18.20.7"

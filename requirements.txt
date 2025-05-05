@@ -37,7 +37,6 @@ django-matplotlib==0.1
 django-pb-model==0.3.3
 django-stubs==5.1.3
 django-stubs-ext==5.1.3
-django-tailwind==3.6.0
 django-template-partials==24.4
 djlint==1.36.4
 dparse==0.6.4

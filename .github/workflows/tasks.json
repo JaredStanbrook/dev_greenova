@@ -688,30 +688,6 @@
       "type": "shell"
     },
     {
-      "dependsOn": ["Django: Run Tailwind", "Django: Run server"],
-      "dependsOrder": "parallel",
-      "group": "none",
-      "label": "Django: Development environment",
-      "presentation": {
-        "panel": "shared",
-        "reveal": "always"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "args": ["-c", "cd greenova && python3 manage.py tailwind start"],
-      "command": "/bin/sh",
-      "group": "none",
-      "label": "Django: Run Tailwind",
-      "presentation": {
-        "panel": "dedicated",
-        "reveal": "always"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
       "args": ["-c", "cd greenova && python3 manage.py runserver"],
       "command": "/bin/sh",
       "group": "none",

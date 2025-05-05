@@ -19,7 +19,6 @@ setup(
         'matplotlib==3.9.4',
         'django-htmx==1.22.0',
         'django-hyperscript==1.0.2',
-        'django-tailwind==3.6.0',
         'django-allauth==65.4.1',
         'django-browser-reload==1.18.0',
         'django-debug-toolbar==5.0.1',

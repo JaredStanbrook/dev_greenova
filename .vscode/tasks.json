@@ -691,25 +691,13 @@
       "type": "shell"
     },
     {
-      "dependsOn": ["Django: Run Tailwind", "Django: Run server"],
-      "dependsOrder": "parallel",
-      "group": "none",
-      "label": "Django: Development environment",
-      "presentation": {
-        "panel": "shared",
-        "reveal": "always"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
       "args": [
         "-c",
-        "cd greenova/theme/static_src/src && npm install && cd ../../.. && python3 manage.py tailwind check-updates && python3 manage.py tailwind update && python3 manage.py tailwind install && python3 manage.py tailwind build"
+        "npx sass --style=expanded --no-source-map --load-path=node_modules/@picocss/pico/scss greenova/static/scss/main.scss greenova/static/css/main.css"
       ],
       "command": "/bin/sh",
       "group": "none",
-      "label": "Django: Build and install Tailwind",
+      "label": "Django: Compile SCSS",
       "presentation": {
         "panel": "dedicated",
         "reveal": "always"
