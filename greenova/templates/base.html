@@ -16,7 +16,6 @@
 {% load hyperscript %}
 {% load hyperscript %}
 {% load django_htmx %}
-{% load tailwind_tags %}
 {% load user_tags %}
 {% load core_tags %}
 <!DOCTYPE html>
@@ -45,15 +44,7 @@
     </title>
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
-    <!-- Critical CSS -->
-    <link rel="preload"
-          href="{% static 'css/critical-styles.css' %}"
-          as="style" />
-    <!-- CSS files -->
-    <link rel="stylesheet" href="{% static 'css/critical-styles.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-{% tailwind_css %}
-
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
@@ -61,138 +52,161 @@
         hx-ext="head-support, loading-states, class-tools, path-deps"
         hx-indicator="#htmx-indicator"
         aria-live="polite">
-    <!-- Skip to main content link for accessibility -->
-    <a class="skip-link" href="#main-content">Skip to content</a>
+   
     <!-- {% include "core/components/error_boundary.html" %}
 
  -->
     <!-- Header with semantic nav -->
-    <header role="banner">
-
+    <header>
       {% block header %}
-
-        <nav>
-          <ul class="theme-container">
-            <li>
-              <a href="#" data-theme-switcher="auto">Auto</a>
-            </li>
-            <li>
-              <a href="#" data-theme-switcher="light">Light</a>
-            </li>
-            <li>
-              <a href="#" data-theme-switcher="dark">Dark</a>
-            </li>
-          </ul>
-          <ul role="menubar" aria-label="Primary navigation">
-            {% if request.user.is_authenticated %}
-              <!-- Left side navigation items -->
-              <li role="none" class="menubar-breadcrumbs">
-                <nav aria-label="Primary navigation" role="navigation">
-                  <ul>
-                    {% if request.resolver_match.namespace == 'dashboard' %}
-                      <li>
-                        <a href="{% url 'dashboard:home' %}"
-                           role="menuitem"
-                           aria-current="{% if request.resolver_match.namespace == 'dashboard' %}
-                                           page
-                                         {% endif %}"
-                           _="on load if location.pathname is '{% url 'dashboard:home' %}' then hide me">Dashboard</a>
-                      </li>
-                    {% else %}
-                      <li>
-                        <a href="{% url 'dashboard:home' %}"
-                           role="menuitem"
-                           aria-current="{% if request.resolver_match.namespace == 'dashboard' %}
-                                           page
-                                         {% endif %}"
-                           _="on load if location.pathname is '{% url 'dashboard:home' %}' then hide me">Dashboard</a>
-                      </li>
-                    {% endif %}
-
-                    {% block breadcrumbs %}
-                    {% endblock breadcrumbs %}
-
-                  </ul>
-                </nav>
-              </li>
-              <!-- Auth Actions (right-aligned) -->
-              <li role="none" class="auth-actions">
-{% load chatbot_tags %}
-
-{% chat_widget %}
-                <a href="{% url 'users:profile' %}"
-                   role="menuitem"
-                   {% if request.path == '/users/profile/' %}
-                     aria-current="page"
-                   {% endif %}>Profile</a>
-                {% if request.user.is_staff %}
-                  <a href="{% url 'company:list' %}"
-                     role="menuitem"
-                     {% if '/company/' in request.path %}
-                       aria-current="page"
-                     {% endif %}>Companies</a>
+      <nav>
+        <ul>
+          <li>
+            <img src="{% static 'img/file.ico' %}">
+            <a href="{% url 'dashboard:home' %}" id="logo">
+              <strong>greenova</strong>
+            </a>
+          </li>
+          
+          <!-- Breadcrumbs navigation -->
+          {% if request.user.is_authenticated %}
+          <li>
+            <nav aria-label="breadcrumbs">
+              <ul>
+                {% if request.resolver_match.namespace == 'dashboard' %}
+                <li>
+                  <a href="{% url 'dashboard:home' %}" 
+                    aria-current="{% if request.resolver_match.namespace == 'dashboard' %}page{% endif %}"
+                    _="on load if location.pathname is '{% url 'dashboard:home' %}' then hide me">
+                    Dashboard
+                  </a>
+                </li>
+                {% else %}
+                <li><a href="{% url 'dashboard:home' %}">Dashboard</a></li>
                 {% endif %}
-                <!-- Logout -->
-                <a href="#"
-                   role="menuitem"
-                   hx-post="{% url 'account_logout' %}"
-                   hx-push-url="true"
-                   hx-target="body"
-                   hx-redirect="/"
-                   hx-include="[name='csrfmiddlewaretoken']">Logout</a>
-                <form id="logout-form" class="hidden">
-{% csrf_token %}
-
-                </form>
-              </li>
-            {% else %}
-              <!-- Unauthenticated user navigation -->
-              <li role="none" class="auth-actions">
-                <a href="{% url 'account_signup' %}"
-                   role="menuitem"
-                   aria-label="Register"
-                   _="on load if location.pathname is '{% url 'account_signup' %}' then hide me">Register</a>
-                <a href="{% url 'account_login' %}"
-                   role="menuitem"
-                   aria-label="Login"
-                   _="on load if location.pathname is '{% url 'account_login' %}' then hide me">Login</a>
-                <a href="{% url 'admin:index' %}"
-                   role="menuitem"
-                   aria-label="Admin"
-                   _="on load if location.pathname.startsWith('/admin/') then hide me">Admin</a>
-              </li>
+                
+                {% block breadcrumbs %}{% endblock breadcrumbs %}
+              </ul>
+            </nav>
+          </li>
+          {% endif %}
+        </ul>
+        
+        <ul>
+          <!-- Theme toggle switcher with sun/moon icons -->
+          <li>
+            <button 
+              id="theme-toggle" 
+              aria-label="Toggle theme"
+              _="on click 
+                 if document.documentElement.getAttribute('data-theme') == 'light' then
+                   document.documentElement.setAttribute('data-theme', 'dark')
+                   localStorage.setItem('theme', 'dark')
+                   set @aria-pressed to 'true'
+                 else
+                   document.documentElement.setAttribute('data-theme', 'light')
+                   localStorage.setItem('theme', 'light')
+                   set @aria-pressed to 'false'
+                 end">
+              <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </li>
+          
+          {% if request.user.is_authenticated %}
+            <!-- Load chat widget -->
+            {% load chatbot_tags %}
+            {% chat_widget %}
+            
+            <li>
+              <a href="{% url 'users:profile' %}" 
+                {% if request.path == '/users/profile/' %}aria-current="page"{% endif %}>
+                Profile
+              </a>
+            </li>
+            
+            {% if request.user.is_staff %}
+            <li>
+              <a href="{% url 'company:list' %}" 
+                {% if '/company/' in request.path %}aria-current="page"{% endif %}>
+                Companies
+              </a>
+            </li>
             {% endif %}
-
-          </ul>
-        </nav>
+            
+            <li>
+              <a href="#"
+                role="button"
+                id="logout-button"
+                hx-post="{% url 'account_logout' %}"
+                hx-push-url="true"
+                hx-target="body"
+                hx-redirect="/"
+                hx-include="[name='csrfmiddlewaretoken']">
+                Logout
+              </a>
+              <form id="logout-form" style="display: none;">
+                {% csrf_token %}
+              </form>
+            </li>
+          {% else %}
+            <!-- Unauthenticated user navigation -->
+            <li>
+              <a href="{% url 'account_signup' %}" 
+                _="on load if location.pathname is '{% url 'account_signup' %}' then hide me">
+                Register
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'account_login' %}" 
+                id="login-button"
+                _="on load if location.pathname is '{% url 'account_login' %}' then hide me">
+                Login
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'admin:index' %}" 
+                _="on load if location.pathname.startsWith('/admin/') then hide me">
+                Admin
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
       {% endblock header %}
-
     </header>
     <!-- After header, before main content -->
 {% include "core/components/status_messages.html" %}
 
     <!-- Main content -->
-    <main id="main-content" role="main">
-
+    <main id="main-content">
       {% block body %}
-
-        {% block content %}
-        {% endblock content %}
+        {% block content %}{% endblock content %}
       {% endblock body %}
-
     </main>
-    <!-- Footer -->
 
-    {% block footer %}
+   <!-- Footer -->
+  {% block footer %}
+  <footer>
+    <small>
+      © {% now "Y" %} greenova environmental management. 
+      <span id="version">version {% site_version %}</span>
+    </small>
+  </footer>
+  {% endblock footer %}
 
-      <footer role="contentinfo">
-        <div class="container">
-          <p>
-              © {% now "Y" %} greenova environmental management. <small>version {% site_version %}</small>
-          </p>
-        </div>
-      </footer>
-    {% endblock footer %}
     <!-- Loading indicator for HTMX requests -->
     <div id="htmx-indicator" class="htmx-indicator" aria-hidden="true">
       <div class="spinner">
