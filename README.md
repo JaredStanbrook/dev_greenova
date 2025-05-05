@@ -28,14 +28,12 @@ programming principles and provides a modular framework for building robust web
 applications.
 
 - Django-Hyperscript 1.0.2
-- Django-Tailwind 3.6.0
 - Django-Allauth 65.4.1
 
 ### Frontend
 
 - HTML5
 - PicoCSS (classless framework)
-- Django-Tailwind (for utility classes)
 - Modern-Normalize
 
 ### DevOps

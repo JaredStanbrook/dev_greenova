@@ -2,42 +2,36 @@
 
 ### Project Title
 
-Front-End UI Design and Styling Using PicoCSS and Django-Tailwind
+Front-End UI Design and Styling Using PicoCSS
 
 ### Project Overview
 
 The goal of this project is to enhance the front-end UI design and styling of
-the Greenova project using PicoCSS and Django-Tailwind. The project involves
-creating a visually appealing and responsive UI using classless PicoCSS and
-Django-Tailwind (Python-specific version) while avoiding the JavaScript main
-version of Tailwind CSS.
+the Greenova project using PicoCSS. The project involves creating a visually
+appealing and responsive UI using classless PicoCSS (Python-specific version).
 
 ### Objectives
 
 1. Understand the current UI design and styling of the project.
 2. Identify areas for improvement in the UI design and styling.
 3. Implement PicoCSS for classless styling.
-4. Implement Django-Tailwind for utility classes and advanced styling.
-5. Ensure the UI is responsive and accessible.
-6. Test the new UI design and styling to ensure it works correctly.
+4. Ensure the UI is responsive and accessible.
+5. Test the new UI design and styling to ensure it works correctly.
 
 ### Deliverables
 
 1. A detailed analysis of the current UI design and styling.
 2. A list of areas for improvement in the UI design and styling.
-3. Updated code with PicoCSS and Django-Tailwind implementations.
+3. Updated code with PicoCSS implementations.
 4. Documentation explaining the changes made.
 5. Test results demonstrating the functionality and responsiveness of the new
    UI design and styling.
 
 ### Timeline
 
-- **Week 1**: Analyze the current UI design and styling and understand PicoCSS
-  and Django-Tailwind.
+- **Week 1**: Analyze the current UI design and styling and understand PicoCSS.
 - **Week 2**: Identify areas for improvement and create a plan.
-- **Week 3**: Implement PicoCSS for classless styling.
-- **Week 4**: Implement Django-Tailwind for utility classes and advanced
-  styling.
+- **Week 3/4**: Implement PicoCSS for classless styling. styling.
 - **Week 5**: Ensure the UI is responsive and accessible.
 - **Week 6**: Test the new UI design and styling and document the changes.
 

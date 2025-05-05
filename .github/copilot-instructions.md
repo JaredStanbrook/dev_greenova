@@ -9,7 +9,7 @@ tracking environmental obligations and compliance requirements.
 
 We use Python 3.9.21 with Django 4.1.13 for backend development.
 
-Our frontend uses PicoCSS as the primary CSS framework. Only use Tailwind CSS
+Our frontend uses PicoCSS as the primary CSS framework.
 
 We implement frontend interactivity with django-hyperscript for simple
 interactions and django-htmx for more complex AJAX functionality. Custom
