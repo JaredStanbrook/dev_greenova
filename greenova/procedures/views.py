@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 @method_decorator(vary_on_headers('HX-Request'), name='dispatch')
 class ProcedureChartsView(LoginRequiredMixin, TemplateView):
     """View for displaying procedure charts filtered by environmental mechanism."""
-    template_name = 'procedures/procedure_charts.html'  # Changed to HTML
+    template_name = 'procedures/procedure.html'  # Changed to HTML
 
     def get_template_names(self):
         """Return appropriate template based on request type."""

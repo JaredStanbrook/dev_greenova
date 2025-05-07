@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load procedure_tags %}
+
+{% block title %}
+  procedure analysis for {{ mechanism.name }}
+{% endblock title %}
+
+{% block body %}
+  <article>
+    <header>
+      <hgroup>
+        <nav aria-label="Breadcrumb" class="breadcrumbs">
+          <ol>
+            <li>
+              <a href="{% url 'dashboard:home' %}?project_id={{ mechanism.project.id }}">Dashboard</a>
+            </li>
+            <li>
+              <a href="#" hx-get="javascript:history.back()">Mechanisms</a>
+            </li>
+            <li>{{ mechanism.name }}</li>
+          </ol>
+        </nav>
+        <h1>Procedure Analysis</h1>
+        <b>{{ mechanism.name }}</b>
+      </hgroup>
+      <a href="{% url 'obligations:create' %}{% if request.GET.project_id %}?project_id={{ request.GET.project_id }}{% endif %}"
+               class="add-obligation-btn"
+               role="button"
+               aria-label="Add new obligation">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="24"
+                   height="24"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2"
+                   stroke-linecap="round"
+                   stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Add Obligation</span>
+            </a>
+    </header>
+    <!-- Filter Section -->
+
+    <details name="filter" open>
+      <summary role="button" class="outline"><strong>Filter Options</strong></summary>
+      <form method="get"
+            action="{% url 'procedures:procedure_charts' mechanism_id=mechanism.id %}"
+            class="filter-container"
+            hx-boost="true">
+          <input type="hidden"
+                id="mechanism_id"
+                name="mechanism_id"
+                value="{{ mechanism.id }}" />
+          <label>
+            Project Phase
+            <select name="phase" aria-label="Project Phase">
+              <option selected disabled value="">
+                All Phases...
+              </option>
+              {% for phase in available_phases %}
+                <option value="{{ phase }}" {% if filter_phase == phase %}selected{% endif %}>
+                  {{ phase }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            Responsibility
+            <select name="responsibility" aria-label="Responsibility">
+              <option value="">All Responsibilities</option>
+              {% for resp in available_responsibilities %}
+                <option value="{{ resp }}" {% if filter_responsibility == resp %}selected{% endif %}>
+                  {{ resp }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+          <label for="status">
+            Status
+            <select name="status" id="status">
+              <option value="">All Statuses</option>
+              {% for status_value, status_label in status_options %}
+                <option value="{{ status_value }}" {% if filter_status == status_value %}selected{% endif %}>
+                  {{ status_label }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+          <!-- Sort Options -->
+          <label for="sort-filter">
+            Sort By:
+            <select id="sort-filter"
+                    name="sort">
+              <option value="obligation_number">Number</option>
+              <option value="action_due_date" selected>Due Date</option>
+              <option value="status">Status</option>
+              <option value="primary_environmental_mechanism__name">Mechanism</option>
+              <option value="project_phase">Phase</option>
+            </select>
+            <select id="order-filter"
+                    name="order"
+                    hx-get="/obligations/summary/"
+                    hx-target="#obligations-container"
+                    hx-trigger="change"
+                    hx-include="input[name='search'], select[name='status'], select[name='phase'], select[name='sort']">
+              <option value="asc" selected>Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </label>
+          <fieldset>
+            <input type="checkbox" name="lookahead" value="14days" {% if filter_lookahead %}checked{% endif %} />
+            <label>14-Day Lookahead</label>
+            <input type="checkbox" name="overdue" value="true" {% if filter_overdue %}checked{% endif %} />
+            <label>Overdue Only</label>
+          </fieldset>
+          <input type="submit" value="Apply Filters"/>
+          <a href="{% url 'procedures:procedure_charts' mechanism_id=mechanism.id %}"
+            role="button"
+            class="btn-secondary">Reset</a>
+      </form>
+    </details>
+    {% include "procedures/components/_procedure_charts.html" %}
+  </article>
+{% endblock body %}

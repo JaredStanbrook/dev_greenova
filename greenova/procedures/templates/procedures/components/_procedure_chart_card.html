@@ -1,0 +1,33 @@
+{% load procedure_tags %}
+
+<section>
+  <header>
+    <h3>{{ procedure.name }}</h3>
+    <div class="grid">
+      <div>
+        <small>Total</small>
+        <strong>{{ procedure.stats.total }}</strong>
+      </div>
+      <div>
+        <small>Not Started</small>
+        <strong>{{ procedure.stats.not_started }}</strong>
+      </div>
+      <div>
+        <small>In Progress</small>
+        <strong>{{ procedure.stats.in_progress }}</strong>
+      </div>
+      <div>
+        <small>Completed</small>
+        <strong>{{ procedure.stats.completed }}</strong>
+      </div>
+      <div>
+        <small>Overdue</small>
+        <strong>{{ procedure.stats.overdue }}</strong>
+      </div>
+    </div>
+  </header>
+  
+  <figure>
+    {{ procedure.chart|safe }}
+  </figure>
+</section>

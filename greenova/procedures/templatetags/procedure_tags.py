@@ -75,7 +75,7 @@ def procedure_status_badge(status: str) -> str:
                        color_class, formatted_status)
 
 
-@register.inclusion_tag('procedures/components/procedure_stats.html')
+@register.inclusion_tag('procedures/components/_procedure_stats.html')
 def procedure_stats(stats: Dict[str, int]) -> Dict[str, Any]:
     """
     Render procedure statistics.
@@ -89,7 +89,7 @@ def procedure_stats(stats: Dict[str, int]) -> Dict[str, Any]:
     return {'stats': stats}
 
 
-@register.inclusion_tag('procedures/components/procedure_chart_card.html')
+@register.inclusion_tag('procedures/components/_procedure_chart_card.html')
 def procedure_chart_card(procedure: Dict[str, Any]) -> Dict[str, Any]:
     """
     Render a procedure chart card.
