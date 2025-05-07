@@ -6,21 +6,18 @@
 @use 'colors' as *;
 @use 'settings' as *;
 @use 'helpers/functions';
-@use 'theme-colors';
+@use 'theme';
 
 // Default: Dark theme
 @mixin theme {
   color-scheme: dark;
-  #{$css-var-prefix}background-color: theme-colors.get(
-    'background-color',
-    'dark'
-  );
+  #{$css-var-prefix}background-color: theme.get('background-color', 'dark');
 
   // Text color
-  #{$css-var-prefix}color: theme-colors.get('text-color', 'dark');
+  #{$css-var-prefix}color: theme.get('text-color', 'dark');
 
   // Text selection color
-  #{$css-var-prefix}text-selection-color: theme-colors.get(
+  #{$css-var-prefix}text-selection-color: theme.get(
     'text-selection-color',
     'dark'
   );
@@ -30,18 +27,15 @@
   #{$css-var-prefix}muted-border-color: #{$slate-850};
 
   // Primary colors
-  #{$css-var-prefix}primary: theme-colors.get('primary', 'dark');
-  #{$css-var-prefix}primary-background: theme-colors.get(
+  #{$css-var-prefix}primary: theme.get('primary', 'dark');
+  #{$css-var-prefix}primary-background: theme.get(
     'primary-background',
     'dark'
   );
   #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
-  #{$css-var-prefix}primary-underline: theme-colors.get(
-    'primary-underline',
-    'dark'
-  );
-  #{$css-var-prefix}primary-hover: theme-colors.get('primary-hover', 'dark');
-  #{$css-var-prefix}primary-hover-background: theme-colors.get(
+  #{$css-var-prefix}primary-underline: theme.get('primary-underline', 'dark');
+  #{$css-var-prefix}primary-hover: theme.get('primary-hover', 'dark');
+  #{$css-var-prefix}primary-hover-background: theme.get(
     'primary-hover-background',
     'dark'
   );
@@ -51,11 +45,8 @@
   #{$css-var-prefix}primary-hover-underline: var(
     #{$css-var-prefix}primary-hover
   );
-  #{$css-var-prefix}primary-focus: theme-colors.get('primary-focus', 'dark');
-  #{$css-var-prefix}primary-inverse: theme-colors.get(
-    'primary-inverse',
-    'dark'
-  );
+  #{$css-var-prefix}primary-focus: theme.get('primary-focus', 'dark');
+  #{$css-var-prefix}primary-inverse: theme.get('primary-inverse', 'dark');
 
   // Secondary colors
   #{$css-var-prefix}secondary: #{$zinc-350};
@@ -211,7 +202,7 @@
       #{$css-var-prefix}primary-background
     );
     #{$css-var-prefix}switch-color: #{$white};
-    #{$css-var-prefix}switch-thumb-box-shadow: theme-colors.get(
+    #{$css-var-prefix}switch-thumb-box-shadow: theme.get(
       'switch-thumb-box-shadow',
       'dark'
     );
@@ -250,7 +241,7 @@
 
   // Card (<article>)
   @if map.get($modules, 'components/card') {
-    #{$css-var-prefix}card-background-color: theme-colors.get(
+    #{$css-var-prefix}card-background-color: theme.get(
       'card-background-color',
       'dark'
     );
@@ -258,7 +249,7 @@
       #{$css-var-prefix}card-background-color
     );
     #{$css-var-prefix}card-box-shadow: var(#{$css-var-prefix}box-shadow);
-    #{$css-var-prefix}card-sectioning-background-color: theme-colors.get(
+    #{$css-var-prefix}card-sectioning-background-color: theme.get(
       'card-sectioning-background-color',
       'dark'
     );

@@ -51,47 +51,7 @@ main {
 body > header,
 body > main,
 body > footer {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding: var(--greenova-block-spacing-vertical) var(--greenova-block-spacing-horizontal);
-}
-@media (min-width: 576px) {
-  body > header,
-  body > main,
-  body > footer {
-    max-width: 510px;
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-@media (min-width: 768px) {
-  body > header,
-  body > main,
-  body > footer {
-    max-width: 700px;
-  }
-}
-@media (min-width: 1024px) {
-  body > header,
-  body > main,
-  body > footer {
-    max-width: 950px;
-  }
-}
-@media (min-width: 1280px) {
-  body > header,
-  body > main,
-  body > footer {
-    max-width: 1200px;
-  }
-}
-@media (min-width: 1536px) {
-  body > header,
-  body > main,
-  body > footer {
-    max-width: 1450px;
-  }
+  padding-block: var(--greenova-block-spacing-vertical);
 }
 
 /**
@@ -99,6 +59,72 @@ body > footer {
  */
 section {
   margin-bottom: var(--greenova-block-spacing-vertical);
+}
+
+/**
+ * Container
+ */
+.container,
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--greenova-spacing);
+  padding-left: var(--greenova-spacing);
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 510px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 700px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 950px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1450px;
+  }
+}
+
+/**
+ * Grid
+ * Minimal grid system with auto-layout columns
+ */
+.grid {
+  grid-column-gap: var(--greenova-grid-column-gap);
+  grid-row-gap: var(--greenova-grid-row-gap);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(0%, 1fr));
+  }
+}
+.grid > * {
+  min-width: 0;
+}
+
+/**
+ * Overflow auto
+ */
+.overflow-auto {
+  overflow: auto;
 }
 
 /**
@@ -279,6 +305,26 @@ del {
 [role=link]:focus-visible {
   box-shadow: 0 0 0 var(--greenova-outline-width) var(--greenova-primary-focus);
 }
+:where(a:not([role=button])).secondary,
+[role=link].secondary {
+  --greenova-color: var(--greenova-secondary);
+  --greenova-underline: var(--greenova-secondary-underline);
+}
+:where(a:not([role=button])).secondary:is([aria-current]:not([aria-current=false]), :hover, :active, :focus),
+[role=link].secondary:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+  --greenova-color: var(--greenova-secondary-hover);
+  --greenova-underline: var(--greenova-secondary-hover-underline);
+}
+:where(a:not([role=button])).contrast,
+[role=link].contrast {
+  --greenova-color: var(--greenova-contrast);
+  --greenova-underline: var(--greenova-contrast-underline);
+}
+:where(a:not([role=button])).contrast:is([aria-current]:not([aria-current=false]), :hover, :active, :focus),
+[role=link].contrast:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+  --greenova-color: var(--greenova-contrast-hover);
+  --greenova-underline: var(--greenova-contrast-hover-underline);
+}
 
 a[role=button] {
   display: inline-block;
@@ -363,6 +409,7 @@ button:focus, button:is([aria-current]:not([aria-current=false])):focus,
   margin-bottom: var(--greenova-spacing);
 }
 
+:is(button, [type=submit], [type=button], [role=button]).secondary,
 [type=reset],
 [type=file]::file-selector-button {
   --greenova-background-color: var(--greenova-secondary-background);
@@ -370,15 +417,66 @@ button:focus, button:is([aria-current]:not([aria-current=false])):focus,
   --greenova-color: var(--greenova-secondary-inverse);
   cursor: pointer;
 }
+:is(button, [type=submit], [type=button], [role=button]).secondary:is([aria-current]:not([aria-current=false]), :hover, :active, :focus),
 [type=reset]:is([aria-current]:not([aria-current=false]), :hover, :active, :focus),
 [type=file]::file-selector-button:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
   --greenova-background-color: var(--greenova-secondary-hover-background);
   --greenova-border-color: var(--greenova-secondary-hover-border);
   --greenova-color: var(--greenova-secondary-inverse);
 }
+:is(button, [type=submit], [type=button], [role=button]).secondary:focus, :is(button, [type=submit], [type=button], [role=button]).secondary:is([aria-current]:not([aria-current=false])):focus,
 [type=reset]:focus,
-[type=file]::file-selector-button:focus {
+[type=reset]:is([aria-current]:not([aria-current=false])):focus,
+[type=file]::file-selector-button:focus,
+[type=file]::file-selector-button:is([aria-current]:not([aria-current=false])):focus {
   --greenova-box-shadow: var(--greenova-button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0)), 0 0 0 var(--greenova-outline-width) var(--greenova-secondary-focus);
+}
+
+:is(button, [type=submit], [type=button], [role=button]).contrast {
+  --greenova-background-color: var(--greenova-contrast-background);
+  --greenova-border-color: var(--greenova-contrast-border);
+  --greenova-color: var(--greenova-contrast-inverse);
+}
+:is(button, [type=submit], [type=button], [role=button]).contrast:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+  --greenova-background-color: var(--greenova-contrast-hover-background);
+  --greenova-border-color: var(--greenova-contrast-hover-border);
+  --greenova-color: var(--greenova-contrast-inverse);
+}
+:is(button, [type=submit], [type=button], [role=button]).contrast:focus, :is(button, [type=submit], [type=button], [role=button]).contrast:is([aria-current]:not([aria-current=false])):focus {
+  --greenova-box-shadow: var(--greenova-button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0)), 0 0 0 var(--greenova-outline-width) var(--greenova-contrast-focus);
+}
+
+:is(button, [type=submit], [type=button], [role=button]).outline,
+[type=reset].outline {
+  --greenova-background-color: transparent;
+  --greenova-color: var(--greenova-primary);
+  --greenova-border-color: var(--greenova-primary);
+}
+:is(button, [type=submit], [type=button], [role=button]).outline:is([aria-current]:not([aria-current=false]), :hover, :active, :focus),
+[type=reset].outline:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+  --greenova-background-color: transparent;
+  --greenova-color: var(--greenova-primary-hover);
+  --greenova-border-color: var(--greenova-primary-hover);
+}
+
+:is(button, [type=submit], [type=button], [role=button]).outline.secondary,
+[type=reset].outline {
+  --greenova-color: var(--greenova-secondary);
+  --greenova-border-color: var(--greenova-secondary);
+}
+:is(button, [type=submit], [type=button], [role=button]).outline.secondary:is([aria-current]:not([aria-current=false]), :hover, :active, :focus),
+[type=reset].outline:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+  --greenova-color: var(--greenova-secondary-hover);
+  --greenova-border-color: var(--greenova-secondary-hover);
+}
+
+:is(button, [type=submit], [type=button], [role=button]).outline.contrast {
+  --greenova-color: var(--greenova-contrast);
+  --greenova-border-color: var(--greenova-contrast);
+}
+:is(button, [type=submit], [type=button], [role=button]).outline.contrast:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+  --greenova-color: var(--greenova-contrast-hover);
+  --greenova-border-color: var(--greenova-contrast-hover);
 }
 
 :where(button, [type=submit], [type=reset], [type=button], [role=button])[disabled],
@@ -822,17 +920,17 @@ textarea[aria-invalid] {
   background-size: 1rem var(--greenova-icon-height) !important;
 }
 
-:where(input, select, textarea, fieldset) + small {
+:where(input, select, textarea, fieldset, .grid) + small {
   display: block;
   width: 100%;
   margin-top: calc(var(--greenova-spacing) * -0.75);
   margin-bottom: var(--greenova-spacing);
   color: var(--greenova-muted-color);
 }
-:where(input, select, textarea, fieldset)[aria-invalid=false] + small {
+:where(input, select, textarea, fieldset, .grid)[aria-invalid=false] + small {
   color: var(--greenova-ins-color);
 }
-:where(input, select, textarea, fieldset)[aria-invalid=true] + small {
+:where(input, select, textarea, fieldset, .grid)[aria-invalid=true] + small {
   color: var(--greenova-del-color);
 }
 
@@ -1274,6 +1372,163 @@ article > footer {
 }
 
 /**
+ * Dropdown (details.dropdown)
+ */
+details.dropdown {
+  position: relative;
+  border-bottom: none;
+}
+details.dropdown summary::after,
+details.dropdown > button::after,
+details.dropdown > a::after {
+  display: block;
+  width: 1rem;
+  height: calc(1rem * var(--greenova-line-height, 1.5));
+  margin-inline-start: 0.25rem;
+  float: right;
+  transform: rotate(0deg) translateX(0.2rem);
+  background-image: var(--greenova-icon-chevron);
+  background-position: right center;
+  background-size: 1rem auto;
+  background-repeat: no-repeat;
+  content: "";
+}
+
+nav details.dropdown {
+  margin-bottom: 0;
+}
+
+details.dropdown summary:not([role]) {
+  height: calc(1rem * var(--greenova-line-height) + var(--greenova-form-element-spacing-vertical) * 2 + var(--greenova-border-width) * 2);
+  padding: var(--greenova-form-element-spacing-vertical) var(--greenova-form-element-spacing-horizontal);
+  border: var(--greenova-border-width) solid var(--greenova-form-element-border-color);
+  border-radius: var(--greenova-border-radius);
+  background-color: var(--greenova-form-element-background-color);
+  color: var(--greenova-form-element-placeholder-color);
+  line-height: inherit;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--greenova-transition), border-color var(--greenova-transition), color var(--greenova-transition), box-shadow var(--greenova-transition);
+}
+details.dropdown summary:not([role]):active, details.dropdown summary:not([role]):focus {
+  border-color: var(--greenova-form-element-active-border-color);
+  background-color: var(--greenova-form-element-active-background-color);
+}
+details.dropdown summary:not([role]):focus {
+  box-shadow: 0 0 0 var(--greenova-outline-width) var(--greenova-form-element-focus-color);
+}
+details.dropdown summary:not([role]):focus-visible {
+  outline: none;
+}
+details.dropdown summary:not([role])[aria-invalid=false] {
+  --greenova-form-element-border-color: var(--greenova-form-element-valid-border-color);
+  --greenova-form-element-active-border-color: var(--greenova-form-element-valid-focus-color);
+  --greenova-form-element-focus-color: var(--greenova-form-element-valid-focus-color);
+}
+details.dropdown summary:not([role])[aria-invalid=true] {
+  --greenova-form-element-border-color: var(--greenova-form-element-invalid-border-color);
+  --greenova-form-element-active-border-color: var(--greenova-form-element-invalid-focus-color);
+  --greenova-form-element-focus-color: var(--greenova-form-element-invalid-focus-color);
+}
+
+nav details.dropdown {
+  display: inline;
+  margin: calc(var(--greenova-nav-element-spacing-vertical) * -1) 0;
+}
+nav details.dropdown summary::after {
+  transform: rotate(0deg) translateX(0rem);
+}
+nav details.dropdown summary:not([role]) {
+  height: calc(1rem * var(--greenova-line-height) + var(--greenova-nav-link-spacing-vertical) * 2);
+  padding: calc(var(--greenova-nav-link-spacing-vertical) - var(--greenova-border-width) * 2) var(--greenova-nav-link-spacing-horizontal);
+}
+nav details.dropdown summary:not([role]):focus-visible {
+  box-shadow: 0 0 0 var(--greenova-outline-width) var(--greenova-primary-focus);
+}
+
+details.dropdown summary + ul {
+  display: flex;
+  z-index: 99;
+  position: absolute;
+  left: 0;
+  flex-direction: column;
+  width: 100%;
+  min-width: fit-content;
+  margin: 0;
+  margin-top: var(--greenova-outline-width);
+  padding: 0;
+  border: var(--greenova-border-width) solid var(--greenova-dropdown-border-color);
+  border-radius: var(--greenova-border-radius);
+  background-color: var(--greenova-dropdown-background-color);
+  box-shadow: var(--greenova-dropdown-box-shadow);
+  color: var(--greenova-dropdown-color);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--greenova-transition), transform 0s ease-in-out 1s;
+}
+details.dropdown summary + ul[dir=rtl] {
+  right: 0;
+  left: auto;
+}
+details.dropdown summary + ul li {
+  width: 100%;
+  margin-bottom: 0;
+  padding: calc(var(--greenova-form-element-spacing-vertical) * 0.5) var(--greenova-form-element-spacing-horizontal);
+  list-style: none;
+}
+details.dropdown summary + ul li:first-of-type {
+  margin-top: calc(var(--greenova-form-element-spacing-vertical) * 0.5);
+}
+details.dropdown summary + ul li:last-of-type {
+  margin-bottom: calc(var(--greenova-form-element-spacing-vertical) * 0.5);
+}
+details.dropdown summary + ul li a {
+  display: block;
+  margin: calc(var(--greenova-form-element-spacing-vertical) * -0.5) calc(var(--greenova-form-element-spacing-horizontal) * -1);
+  padding: calc(var(--greenova-form-element-spacing-vertical) * 0.5) var(--greenova-form-element-spacing-horizontal);
+  overflow: hidden;
+  border-radius: 0;
+  color: var(--greenova-dropdown-color);
+  text-decoration: none;
+  text-overflow: ellipsis;
+}
+details.dropdown summary + ul li a:hover, details.dropdown summary + ul li a:focus, details.dropdown summary + ul li a:active, details.dropdown summary + ul li a:focus-visible, details.dropdown summary + ul li a[aria-current]:not([aria-current=false]) {
+  background-color: var(--greenova-dropdown-hover-background-color);
+}
+details.dropdown summary + ul li label {
+  width: 100%;
+}
+details.dropdown summary + ul li:has(label):hover {
+  background-color: var(--greenova-dropdown-hover-background-color);
+}
+
+details.dropdown[open] summary {
+  margin-bottom: 0;
+}
+
+details.dropdown[open] summary + ul {
+  transform: scaleY(1);
+  opacity: 1;
+  transition: opacity var(--greenova-transition), transform 0s ease-in-out 0s;
+}
+
+details.dropdown[open] summary::before {
+  display: block;
+  z-index: 1;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  inset: 0;
+  background: none;
+  content: "";
+  cursor: default;
+}
+
+label > details.dropdown {
+  margin-top: calc(var(--greenova-spacing) * 0.25);
+}
+
+/**
  * Group ([role="group"], [role="search"])
  */
 [role=search],
@@ -1479,7 +1734,7 @@ dialog article {
 dialog article > header > * {
   margin-bottom: 0;
 }
-dialog article > header :is(a, button)[rel=prev] {
+dialog article > header .close, dialog article > header :is(a, button)[rel=prev] {
   margin: 0;
   margin-left: var(--greenova-spacing);
   padding: 0;
@@ -1496,7 +1751,7 @@ dialog article > footer button:not(:first-of-type),
 dialog article > footer [role=button]:not(:first-of-type) {
   margin-left: calc(var(--greenova-spacing) * 0.5);
 }
-dialog article :is(a, button)[rel=prev] {
+dialog article .close, dialog article :is(a, button)[rel=prev] {
   display: block;
   width: 1rem;
   height: 1rem;
@@ -1512,13 +1767,57 @@ dialog article :is(a, button)[rel=prev] {
   opacity: 0.5;
   transition: opacity var(--greenova-transition);
 }
-dialog article :is(a, button)[rel=prev]:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
+dialog article .close:is([aria-current]:not([aria-current=false]), :hover, :active, :focus), dialog article :is(a, button)[rel=prev]:is([aria-current]:not([aria-current=false]), :hover, :active, :focus) {
   opacity: 1;
 }
 dialog:not([open]), dialog[open=false] {
   display: none;
 }
 
+.modal-is-open {
+  padding-right: var(--greenova-scrollbar-width, 0px);
+  overflow: hidden;
+  pointer-events: none;
+  touch-action: none;
+}
+.modal-is-open dialog {
+  pointer-events: auto;
+  touch-action: auto;
+}
+
+:where(.modal-is-opening, .modal-is-closing) dialog,
+:where(.modal-is-opening, .modal-is-closing) dialog > article {
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+:where(.modal-is-opening, .modal-is-closing) dialog {
+  animation-duration: 0.8s;
+  animation-name: modal-overlay;
+}
+:where(.modal-is-opening, .modal-is-closing) dialog > article {
+  animation-delay: 0.2s;
+  animation-name: modal;
+}
+
+.modal-is-closing dialog,
+.modal-is-closing dialog > article {
+  animation-delay: 0s;
+  animation-direction: reverse;
+}
+
+@keyframes modal-overlay {
+  from {
+    backdrop-filter: none;
+    background-color: transparent;
+  }
+}
+@keyframes modal {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
 /**
  * Nav
  */
@@ -1882,7 +2181,7 @@ textarea,
 }
 :root,
 :host {
-  --greenova-font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --greenova-font-family-emoji: "'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'";
   --greenova-font-family-sans-serif: system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue", sans-serif, var(--greenova-font-family-emoji);
   --greenova-font-family-monospace: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace, var(--greenova-font-family-emoji);
   --greenova-font-family: var(--greenova-font-family-sans-serif);
@@ -1890,7 +2189,7 @@ textarea,
   --greenova-font-weight: 400;
   --greenova-font-size: 100%;
   --greenova-text-underline-offset: 0.1rem;
-  --greenova-border-radius: 0.25rem;
+  --greenova-border-radius: 0.5rem;
   --greenova-border-width: 0.0625rem;
   --greenova-outline-width: 0.125rem;
   --greenova-transition: 0.2s ease-in-out;
@@ -1898,6 +2197,8 @@ textarea,
   --greenova-typography-spacing-vertical: 1rem;
   --greenova-block-spacing-vertical: var(--greenova-spacing);
   --greenova-block-spacing-horizontal: var(--greenova-spacing);
+  --greenova-grid-column-gap: var(--greenova-spacing);
+  --greenova-grid-row-gap: var(--greenova-spacing);
   --greenova-form-element-spacing-vertical: 0.75rem;
   --greenova-form-element-spacing-horizontal: 1rem;
   --greenova-group-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -1950,6 +2251,9 @@ textarea,
 }
 
 a {
+  --greenova-text-decoration: underline;
+}
+a.secondary, a.contrast {
   --greenova-text-decoration: underline;
 }
 
@@ -2044,10 +2348,38 @@ input:not([type=submit],
   --greenova-border-width: 0.1875rem;
 }
 
+details.dropdown summary:not([role=button]) {
+  --greenova-outline-width: 0.0625rem;
+}
+
+nav details.dropdown summary:focus-visible {
+  --greenova-outline-width: 0.125rem;
+}
+
 [role=search] {
   --greenova-border-radius: 5rem;
 }
 
+[role=search]:has(button.secondary:focus,
+[type=submit].secondary:focus,
+[type=button].secondary:focus,
+[role=button].secondary:focus),
+[role=group]:has(button.secondary:focus,
+[type=submit].secondary:focus,
+[type=button].secondary:focus,
+[role=button].secondary:focus) {
+  --greenova-group-box-shadow-focus-with-button: 0 0 0 var(--greenova-outline-width) var(--greenova-secondary-focus);
+}
+[role=search]:has(button.contrast:focus,
+[type=submit].contrast:focus,
+[type=button].contrast:focus,
+[role=button].contrast:focus),
+[role=group]:has(button.contrast:focus,
+[type=submit].contrast:focus,
+[type=button].contrast:focus,
+[role=button].contrast:focus) {
+  --greenova-group-box-shadow-focus-with-button: 0 0 0 var(--greenova-outline-width) var(--greenova-contrast-focus);
+}
 [role=search] button,
 [role=search] [type=submit],
 [role=search] [type=button],
@@ -2059,11 +2391,11 @@ input:not([type=submit],
   --greenova-form-element-spacing-horizontal: 2rem;
 }
 
-details summary[role=button]::after {
+details summary[role=button]:not(.outline)::after {
   filter: brightness(0) invert(1);
 }
 
-[aria-busy=true]:not(input, select, textarea):is(button, [type=submit], [type=button], [type=reset], [role=button])::before {
+[aria-busy=true]:not(input, select, textarea):is(button, [type=submit], [type=button], [type=reset], [role=button]):not(.outline)::before {
   filter: brightness(0) invert(1);
 }
 
@@ -2161,7 +2493,12 @@ details summary[role=button]::after {
   --greenova-card-background-color: #e8ede3;
   --greenova-card-border-color: var(--greenova-muted-border-color);
   --greenova-card-box-shadow: var(--greenova-box-shadow);
-  --greenova-card-sectioning-background-color: #3d4d36;
+  --greenova-card-sectioning-background-color: #a5b485;
+  --greenova-dropdown-background-color: #fff;
+  --greenova-dropdown-border-color: #eff1f4;
+  --greenova-dropdown-box-shadow: var(--greenova-box-shadow);
+  --greenova-dropdown-color: var(--greenova-color);
+  --greenova-dropdown-hover-background-color: #eff1f4;
   --greenova-loading-spinner-opacity: 0.5;
   --greenova-modal-overlay-background-color: rgba(232, 234, 237, 0.75);
   --greenova-progress-background-color: #dfe3eb;
@@ -2284,6 +2621,11 @@ details summary[role=button]::after {
     --greenova-card-border-color: var(--greenova-card-background-color);
     --greenova-card-box-shadow: var(--greenova-box-shadow);
     --greenova-card-sectioning-background-color: #5a6a4b;
+    --greenova-dropdown-background-color: #181c25;
+    --greenova-dropdown-border-color: #202632;
+    --greenova-dropdown-box-shadow: var(--greenova-box-shadow);
+    --greenova-dropdown-color: var(--greenova-color);
+    --greenova-dropdown-hover-background-color: #202632;
     --greenova-loading-spinner-opacity: 0.5;
     --greenova-modal-overlay-background-color: rgba(7.5, 8.5, 10, 0.75);
     --greenova-progress-background-color: #202632;
@@ -2306,6 +2648,22 @@ details summary[role=button]::after {
   [type=radio],
   [type=file]) {
     --greenova-form-element-focus-color: var(--greenova-primary-focus);
+  }
+  :root:not([data-theme]) details summary[role=button].contrast:not(.outline)::after,
+  :host(:not([data-theme])) details summary[role=button].contrast:not(.outline)::after {
+    filter: brightness(0);
+  }
+  :root:not([data-theme]) [aria-busy=true]:not(input, select, textarea).contrast:is(button,
+  [type=submit],
+  [type=button],
+  [type=reset],
+  [role=button]):not(.outline)::before,
+  :host(:not([data-theme])) [aria-busy=true]:not(input, select, textarea).contrast:is(button,
+  [type=submit],
+  [type=button],
+  [type=reset],
+  [role=button]):not(.outline)::before {
+    filter: brightness(0);
   }
 }
 [data-theme=dark] {
@@ -2398,6 +2756,11 @@ details summary[role=button]::after {
   --greenova-card-border-color: var(--greenova-card-background-color);
   --greenova-card-box-shadow: var(--greenova-box-shadow);
   --greenova-card-sectioning-background-color: #5a6a4b;
+  --greenova-dropdown-background-color: #181c25;
+  --greenova-dropdown-border-color: #202632;
+  --greenova-dropdown-box-shadow: var(--greenova-box-shadow);
+  --greenova-dropdown-color: var(--greenova-color);
+  --greenova-dropdown-hover-background-color: #202632;
   --greenova-loading-spinner-opacity: 0.5;
   --greenova-modal-overlay-background-color: rgba(7.5, 8.5, 10, 0.75);
   --greenova-progress-background-color: #202632;
@@ -2414,6 +2777,16 @@ details summary[role=button]::after {
 [type=radio],
 [type=file]) {
   --greenova-form-element-focus-color: var(--greenova-primary-focus);
+}
+[data-theme=dark] details summary[role=button].contrast:not(.outline)::after {
+  filter: brightness(0);
+}
+[data-theme=dark] [aria-busy=true]:not(input, select, textarea).contrast:is(button,
+[type=submit],
+[type=button],
+[type=reset],
+[role=button]):not(.outline)::before {
+  filter: brightness(0);
 }
 
 progress,
@@ -2493,4 +2866,9 @@ nav[aria-label=breadcrumbs] li:not(:last-child)::after {
   content: "/";
   margin: 0 0.5rem;
   opacity: 0.5;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
 }

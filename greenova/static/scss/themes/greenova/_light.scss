@@ -6,21 +6,21 @@
 @use 'colors' as *;
 @use 'settings' as *;
 @use 'helpers/functions';
-@use 'theme-colors';
+@use 'theme';
 
 // Default: Light theme
 @mixin theme {
   color-scheme: light;
-  #{$css-var-prefix}background-color: theme-colors.get(
+  #{$css-var-prefix}background-color: theme.get(
     'background-color',
     'light'
   );
 
   // Text color
-  #{$css-var-prefix}color: theme-colors.get('text-color', 'light');
+  #{$css-var-prefix}color: theme.get('text-color', 'light');
 
   // Text selection color
-  #{$css-var-prefix}text-selection-color: theme-colors.get(
+  #{$css-var-prefix}text-selection-color: theme.get(
     'text-selection-color',
     'light'
   );
@@ -30,18 +30,18 @@
   #{$css-var-prefix}muted-border-color: #{color.mix($slate-100, $slate-50)};
 
   // Primary colors
-  #{$css-var-prefix}primary: theme-colors.get('primary', 'light');
-  #{$css-var-prefix}primary-background: theme-colors.get(
+  #{$css-var-prefix}primary: theme.get('primary', 'light');
+  #{$css-var-prefix}primary-background: theme.get(
     'primary-background',
     'light'
   );
   #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
-  #{$css-var-prefix}primary-underline: theme-colors.get(
+  #{$css-var-prefix}primary-underline: theme.get(
     'primary-underline',
     'light'
   );
-  #{$css-var-prefix}primary-hover: theme-colors.get('primary-hover', 'light');
-  #{$css-var-prefix}primary-hover-background: theme-colors.get(
+  #{$css-var-prefix}primary-hover: theme.get('primary-hover', 'light');
+  #{$css-var-prefix}primary-hover-background: theme.get(
     'primary-hover-background',
     'light'
   );
@@ -51,8 +51,8 @@
   #{$css-var-prefix}primary-hover-underline: var(
     #{$css-var-prefix}primary-hover
   );
-  #{$css-var-prefix}primary-focus: theme-colors.get('primary-focus', 'light');
-  #{$css-var-prefix}primary-inverse: theme-colors.get(
+  #{$css-var-prefix}primary-focus: theme.get('primary-focus', 'light');
+  #{$css-var-prefix}primary-inverse: theme.get(
     'primary-inverse',
     'light'
   );
@@ -211,7 +211,7 @@
       #{$css-var-prefix}primary-background
     );
     #{$css-var-prefix}switch-color: #{$white};
-    #{$css-var-prefix}switch-thumb-box-shadow: theme-colors.get(
+    #{$css-var-prefix}switch-thumb-box-shadow: theme.get(
       'switch-thumb-box-shadow',
       'light'
     );
@@ -250,7 +250,7 @@
 
   // Card (<article>)
   @if map.get($modules, 'components/card') {
-    #{$css-var-prefix}card-background-color: theme-colors.get(
+    #{$css-var-prefix}card-background-color: theme.get(
       'card-background-color',
       'light'
     );
@@ -258,7 +258,7 @@
       #{$css-var-prefix}muted-border-color
     );
     #{$css-var-prefix}card-box-shadow: var(#{$css-var-prefix}box-shadow);
-    #{$css-var-prefix}card-sectioning-background-color: theme-colors.get(
+    #{$css-var-prefix}card-sectioning-background-color: theme.get(
       'card-sectioning-background-color',
       'light'
     );

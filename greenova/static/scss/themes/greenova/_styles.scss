@@ -5,14 +5,12 @@
 @use 'colors' as *;
 @use 'settings' as *;
 @use 'helpers/functions';
-@use 'theme-colors';
+@use 'theme';
 
 :root,
 :host {
   // Typography
-  #{$css-var-prefix}font-family-emoji:
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
+  #{$css-var-prefix}font-family-emoji: theme.get('font-family-emoji', 'base');
   #{$css-var-prefix}font-family-sans-serif:
     system-ui, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial,
     'Helvetica Neue', sans-serif, var(#{$css-var-prefix}font-family-emoji);
@@ -26,7 +24,7 @@
   #{$css-var-prefix}text-underline-offset: 0.1rem;
 
   // Borders
-  #{$css-var-prefix}border-radius: 0.25rem;
+  #{$css-var-prefix}border-radius: theme.get('border-radius', 'base');
   #{$css-var-prefix}border-width: 0.0625rem;
   #{$css-var-prefix}outline-width: 0.125rem;
 
@@ -34,7 +32,7 @@
   #{$css-var-prefix}transition: 0.2s ease-in-out;
 
   // Spacings
-  #{$css-var-prefix}spacing: 1rem;
+  #{$css-var-prefix}spacing: theme.get('spacing', 'base');
 
   // Spacings for typography elements
   @if map.get($modules, 'content/typography') {
@@ -95,7 +93,10 @@
     #{$css-var-prefix}nav-element-spacing-horizontal: 0.5rem;
     #{$css-var-prefix}nav-link-spacing-vertical: 0.5rem;
     #{$css-var-prefix}nav-link-spacing-horizontal: 0.5rem;
-    #{$css-var-prefix}nav-breadcrumb-divider: '>';
+    #{$css-var-prefix}nav-breadcrumb-divider: theme.get(
+      'nav-breadcrumb-divider',
+      'base'
+    );
   }
 
   // Checkboxes icons
@@ -430,7 +431,7 @@ input:not(
     }
     #{$selector} {
       &::before {
-        @if theme-colors.get('primary-inverse', 'dark') == $white {
+        @if theme.get('primary-inverse', 'dark') == $white {
           filter: brightness(0) invert(1);
         } @else {
           filter: brightness(0) invert(1);

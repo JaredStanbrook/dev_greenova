@@ -57,6 +57,7 @@
 
  -->
     <!-- Header with semantic nav -->
+    <main class="container">
     <header>
       {% block header %}
       <nav>
@@ -187,11 +188,12 @@
       </nav>
       {% endblock header %}
     </header>
+    </main>
     <!-- After header, before main content -->
 {% include "core/components/status_messages.html" %}
 
     <!-- Main content -->
-    <main id="main-content">
+    <main id="main-content" class="container">
       {% block body %}
         {% block content %}{% endblock content %}
       {% endblock body %}

@@ -10,15 +10,16 @@
 $color-mappings: (
   'greenova': (
     'base': (
+      'font-family-emoji':
+        "'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+      'font-family-sans-serif':
+        "system-ui, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, 'Helvetica Neue', sans-serif",
+      'font-family-monospace':
+        "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+      'nav-breadcrumb-divider': '>',
       'border-radius': 0.5rem,
-      'border-radius-small': 0.25rem,
-      'spacing-large': 0.75rem,
-      'spacing': 0.46875rem,
-      'spacing-small': 0.3125rem,
-      'padding-large': 1.25rem,
+      'spacing': 1rem,
       'padding': 0.625rem,
-      'padding-small': 0.3125rem,
-      'shadow': '0 0.125rem 0.125rem rgb(0 0 0 / 10%)',
       'title-size': 1.2rem,
       'subtitle-size': 0.9rem,
       'text-size': 0.8rem,
@@ -26,7 +27,7 @@ $color-mappings: (
       'input-size': 0.75rem,
       'table-size': 0.7rem,
       'button-size': 0.8rem,
-    )
+    ),
     'dark': (
       // Base colors
       'background-color': #2c3328,
@@ -63,7 +64,7 @@ $color-mappings: (
       // Component-specific colors
       'switch-thumb-box-shadow': 0 0 0.5rem rgba(#000, 0.15),
       'card-background-color': #e8ede3,
-      'card-sectioning-background-color': #3d4d36,
+      'card-sectioning-background-color': #a5b485,
     ),
   ),
 );

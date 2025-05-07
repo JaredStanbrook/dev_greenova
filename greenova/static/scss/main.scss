@@ -5,8 +5,6 @@
 // @use 'pico';
 @use 'pico' with (
   $css-var-prefix: '--greenova-',
-  $enable-semantic-container: true,
-  $enable-classes: false,
   $theme-color: 'greenova',
   $modules: (
     'themes/default': false,
